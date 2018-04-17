@@ -1,0 +1,19 @@
+{
+  "name": "desertfox",
+  "version": "1.0.0",
+  "description": "Development of single source management from RFP to proposal in hand.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/engdavide/desertfox.git"
+  },
+  "author": "David Eng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/engdavide/desertfox/issues"
+  },
+  "homepage": "https://github.com/engdavide/desertfox#readme"
+}
