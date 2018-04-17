@@ -9,10 +9,20 @@ const   oppsRoutes = require('./routes/opps');
 
 const app = express();
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({extended: true})));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 
 mongoose.connect("mongodb://localhost/desertfox");
 
 
 //AUTH CONFIG HERE...
+
+
+
+
+
+app.use("oppsRoutes");
+
+app.listen(process.env.PORT, process.env.IP, function(){
+        console.log("It's alive!")
+})
