@@ -14,11 +14,18 @@ router.get("/opps", function(req,res){
 });
 
 router.post("/opps", function(req,res){
-    let custNum = req.body.custNum;
-    let salesRep = req.body.salesRep;
-    let closeDate = req.body.closeDate;
-    let oppName = req.body.oppName;
-    let newOpp = {custNum: custNum, salesRep: salesRep, closeDate: closeDate, oppName: oppName};
+
+    let newOpp = {  custNum: req.body.custNum, 
+                    salesRep: req.body.salesRep, 
+                    closeDate: req.body.closeDate, 
+                    oppName: req.body.oppName,
+                    address: req.body.addresss,
+                    qqType: req.body.qqType,
+                    structure: req.body.structure,
+                    panel1: req.body.panel1,
+                    panel2: req.body.panel2,
+                    hem: req.body.hem,
+    };
         Opps.create(newOpp, function(err, newlyCreated){
             if(err){
                 console.log(err);

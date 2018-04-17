@@ -1,25 +1,94 @@
 <h1>All opps...</h1>
 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 
+
+<!--Styling-->
+<link rel-"stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></link>
+
+<style>
+    .odd{
+        background: gray;
+    }
+    
+</style>
 
     <div class="container">
         <!-- TODO jumbotron here-->
         
-        
-        <div class="row">
-            <% opps.forEach(function(opps){ %>
-                <div class="col-md-3 col-sm-6">
-                    <p> <%= opps.custNum %> </p>
-                    
-                </div>
-            <% }) %>
-            
-            
-        </div>
-        
-        
+
+        <table id="opp-table" class="table table-striped table-bordered">
+            <thead>
+                <th>Customer Num</th>
+                <th>Rep</th>
+                <th>Close Date</th>
+                <th>Project Name</th>
+                <th>QQ Type</th>
+                <th>Address</th>
+                <th>Structure</th>
+                <th>Panel1</th>
+                <th>Panel2</th>
+                <th>Hem</th>
+            </thead>
+            <tbody>
+                
+                <% opps.forEach(function(opps){ %>-->
+                    <tr>
+                        <td><%= opps.custNum %></td>
+                        <td><%= opps.salesRep %></td>
+                        <td><%= opps.closeDate %></td>
+                        <td><%= opps.oppName %></td>
+                        <td><%= opps.qqType %></td>
+                        <td><%= opps.address %></td>
+                        <td><%= opps.structure %></td>
+                        <td><%= opps.panel1 %></td>
+                        <td><%= opps.panel2 %></td>
+                        <td><%= opps.hem %></td>
+                    </tr>
+                    <% }) %>
+                
+            </tbody>
+        </table>
     </div>
 
+<hr>
 <a class='btn btn-primary btn-md' href='/opps/new'>Add new opp</a>
 <hr>
 <a href='/'>go home</a>
+
+
+<!--Search Bar-->
+<script>
+    $(document).ready(function() {
+    $('#opp-table').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );
+</script>
+
+<!--Hide/Show cols-->
+<script>>
+
+</script>
