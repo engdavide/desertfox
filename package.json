@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/engdavide/desertfox/issues"
   },
-  "homepage": "https://github.com/engdavide/desertfox#readme"
+  "homepage": "https://github.com/engdavide/desertfox#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.8",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.15",
+    "request": "^2.85.0"
+  }
 }
