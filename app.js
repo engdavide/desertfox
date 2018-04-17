@@ -3,9 +3,10 @@ const   express = require('express'),
         bodyParser = require('body-parser'),
         mongoose = require('mongoose');
         
-const   opps = require('./models/opps');
+const   Opps = require('./models/opps');
 
 const   oppsRoutes = require('./routes/opps');
+const   indexRoutes = require('./routes/index');
 
 const app = express();
 app.set("view engine", "ejs");
@@ -21,8 +22,9 @@ mongoose.connect("mongodb://localhost/desertfox");
 
 
 
-app.use("oppsRoutes");
+app.use(oppsRoutes);
+app.use(indexRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
-        console.log("It's alive!")
+        console.log("It's alive!");
 })
