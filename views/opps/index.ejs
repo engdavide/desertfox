@@ -1,23 +1,21 @@
-<h1>All opps...</h1>
+<% include ../partials/header %>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 
-
 <!--Styling-->
 <link rel-"stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"></link>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></link>
 
-<style>
-    .odd{
-        background: gray;
-    }
-    
-</style>
+<div class="container">
+    <h1>All opps...</h1>
+    <!-- TODO jumbotron here-->
+</div>
+
 
     <div class="container">
-        <!-- TODO jumbotron here-->
+        
         
 
         <table id="opp-table" class="table table-striped table-bordered">
@@ -34,8 +32,8 @@
                 <th>Hem</th>
             </thead>
             <tbody>
-                
-                <% opps.forEach(function(opps){ %>-->
+                <!--Opps model passed as opps from routes/opp.js-->
+                <% opps.forEach(function(opps){ %>
                     <tr>
                         <td><%= opps.custNum %></td>
                         <td><%= opps.salesRep %></td>
@@ -54,10 +52,14 @@
         </table>
     </div>
 
-<hr>
-<a class='btn btn-primary btn-md' href='/opps/new'>Add new opp</a>
-<hr>
-<a href='/'>go home</a>
+<div class="container">
+    <a class='btn btn-primary btn-md' href='/opps/new'>Add new opp</a>
+    <hr>
+    <a href='/'>go home</a>
+</div>
+
+
+
 
 
 <!--Search Bar-->
@@ -92,3 +94,6 @@
 <script>>
 
 </script>
+
+
+<% include ../partials/footer %>

@@ -3,7 +3,9 @@ const   express = require('express'),
         bodyParser = require('body-parser'),
         mongoose = require('mongoose');
         
-const   Opps = require('./models/opps');
+const   Opps = require('./models/opps'),
+        Custs = require('./models/custs'),
+        seedDB = require('./seeds');
 
 const   oppsRoutes = require('./routes/opps');
 const   indexRoutes = require('./routes/index');
@@ -17,7 +19,7 @@ mongoose.connect("mongodb://localhost/desertfox");
 
 
 //AUTH CONFIG HERE...
-
+seedDB();
 
 
 

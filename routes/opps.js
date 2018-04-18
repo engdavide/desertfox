@@ -1,20 +1,20 @@
 const   express = require('express'),
         router = express.Router();
         
-const   Opps = require('../models/opps')
+const   Opps = require('../models/opps'),
+        Custs = require('../models/custs');
         
 router.get("/opps", function(req,res){
     Opps.find({}, function(err, allOpps){
         if(err){
-            console.log(err)
-        } else {
+            console.log(err);
+        } else {;
             res.render("opps/index", {opps: allOpps})
         }
-    })
+    });
 });
 
 router.post("/opps", function(req,res){
-
     let newOpp = {  custNum: req.body.custNum, 
                     salesRep: req.body.salesRep, 
                     closeDate: req.body.closeDate, 
@@ -33,12 +33,19 @@ router.post("/opps", function(req,res){
                 // TODO: Add associations here later
                 res.redirect("/opps");
             }
-        })
+        });
 });
 
 router.get("/opps/new", function(req,res){
-    res.render("opps/new")
-})
+    Custs.find({}, function(err, allCusts){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(allCusts)
+            res.render("opps/new", {custs: allCusts});
+        }
+    });
+});
 
 
 module.exports = router;

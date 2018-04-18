@@ -1,27 +1,18 @@
-const Custs = require('../../models/custs'); //need to fix this
-const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost/desertfox");
-
-
-let custNumSelect = document.querySelector('input[name="custNum"]');
-let custNameOut = document.querySelector('#custName');
-
 let panel1Select = document.querySelector('select[name="panel1"]');
 let coverage1Select = document.querySelector('select[name="coverage1"]');
 
 let panel2Select = document.querySelector('select[name="panel2"]');
 let coverage2Select = document.querySelector('select[name="coverage2"]');
 
+let custNumSelect = document.querySelector('input[name="custNum"]');
+let custNameOut = document.querySelector('#custName');
 
-custNumSelect.addEventListener('change', function(){
-    let cust = Custs.find({'num': custNumSelect.value}, function(err, res){
-    });
+//Custs passed as custs from routes/opps.js
+custNumSelect.addEventListener('change', function (){
+    let cust = getCustNum();
     custNameOut.textContent = cust.name
-   
-})
 
-
-
+});
 
 
 
