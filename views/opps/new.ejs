@@ -91,16 +91,64 @@
     
 
 
-<script src="/js/oppsnew.js"></script>
 
-<!--Need to fix this...-->
-<%
+
+<script>
+    let panel1Select = $('select[name="panel1"]');
+    let coverage1Select = $('select[name="coverage1"]');
+    panel1Select.change(function(){
+        if($(this).val()=="GulfRib" || $(this).val()=="GulfPBR"){
+            coverage1Select.html('<option value="36\"">36"</option>');
+        } else if($(this).val()=="5VCrimp") {
+            coverage1Select.html('<option value="24\"">24"</option>');
+        } else if($(this).val()=="GulfWave") {
+            coverage1Select.html('<option value="29.5\"">29.5"</option>');
+        } else if($(this).val()=="GulfLok") {
+            coverage1Select.html('<option value="16\"">16"</option>' +
+                                 '<option value="12\"">12"</option>');
+        } else if($(this).val()=="GulfSeam" || $(this).val()=="VersaLoc" || $(this).val()=="MegaLoc") {
+            coverage1Select.html('<option value="16\"">16"</option>' +
+                                    '<option value="18\"">18"</option>' + 
+                                    '<option value="14\"">14"</option>') ;
+        }
+    }); 
+    
+    let panel2Select = $('select[name="panel2"]');
+    let coverage2Select = $('select[name="coverage2"]');
+    panel2Select.change(function(){
+        if($(this).val()=="GulfRib" || $(this).val()=="GulfPBR"){
+            coverage2Select.html('<option value="36\"">36"</option>');
+        } else if($(this).val()=="5VCrimp") {
+            coverage2Select.html('<option value="24\"">24"</option>');
+        } else if($(this).val()=="GulfWave") {
+            coverage2Select.html('<option value="29.5\"">29.5"</option>');
+        } else if($(this).val()=="GulfLok") {
+            coverage2Select.html('<option value="16\"">16"</option>' +
+                                 '<option value="12\"">12"</option>');
+        } else if($(this).val()=="GulfSeam" || $(this).val()=="VersaLoc" || $(this).val()=="MegaLoc") {
+            coverage2Select.html('<option value="16\"">16"</option>' +
+                                    '<option value="18\"">18"</option>' + 
+                                    '<option value="14\"">14"</option>') ;
+        }
+    }); 
+    
+    
+    let custNumSelect = $('input[name="custNum"]');
+    let custNameOut = $('#custName');    
+    
+    //Custs passed as custs from routes/opps.js...
+
+    custNumSelect.change( function(){
+        let cust = getCustNum();
+        console.log(custs)
+        custNameOut.textContent = cust.name
+    });    
     function getCustNum(){
-        console.log(custs[1].name)
         return custs.find({'num': custNumSelect.value}, function(err, res){
         })
     };
-%>
+    
+</script>
 
 
 <% include ../partials/footer %>
