@@ -17,6 +17,13 @@ let oppsSchema = new mongoose.Schema({
     hem: String,
     timeIn: String,
     timeout: String,
+    status: [
+        {
+            name: String,
+            time: String
+        }],
+        //TODO consider if this should be it's own model and how to tie to Quote
+        // status
     notes: [
         {
             type: mongoose.Schema.Types.ObjectId,

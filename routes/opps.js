@@ -5,16 +5,18 @@ const   Opps = require('../models/opps'),
         Custs = require('../models/custs'),
         Notes = require('../models/notes');
         
+//INDEX
 router.get("/opps", function(req,res){
-    Opps.find({}, function(err, allOpps){
+    Opps.find({}).populate("status").exec(function(err, allOpps){
         if(err){
             console.log(err);
-        } else {;
-            res.render("opps/index", {opps: allOpps})
+        } else {
+            res.render("opps/index", {opps: allOpps});
         }
     });
 });
 
+//CREATE
 router.post("/opps", function(req,res){
     let newOpp = {  custNum: req.body.custNum, 
                     salesRep: req.body.salesRep, 
@@ -37,6 +39,7 @@ router.post("/opps", function(req,res){
         });
 });
 
+//NEW
 router.get("/opps/new", function(req,res){
     Custs.find({}, function(err, allCusts){
         if(err){
@@ -48,6 +51,7 @@ router.get("/opps/new", function(req,res){
     });
 });
 
+//SHOW
 router.get("/opps/:id", function(req, res) {
     Opps.findById(req.params.id).populate("notes").exec(function(err, foundOpp){
         if(err) {
@@ -57,6 +61,31 @@ router.get("/opps/:id", function(req, res) {
         }
     })
 })
+
+//EDIT
+router.get("/opps/:id/edit", function(req, res){
+    Opps.findById(req.params.id, function(err, foundOpp){
+        if(err){
+            console.log(err);
+            res.redirect("/opps")
+        } else {
+            res.render("opps/edit", {opp: foundOpp})
+        }
+    })
+});
+
+//UPDATE
+router.put("/opps/:id", function(req, res){
+    Opps.findByIdAndUpdate(req.params.id, req.body.opp, function(err, updatedOpp){
+        if(err){
+            res.redirect("/opps");
+        } else {
+            res.redirect("/opps")
+            // res.redirect("/opps/" + req.params.id)
+        }
+    })
+})
+
 
 
 module.exports = router;

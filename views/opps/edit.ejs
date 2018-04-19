@@ -1,0 +1,96 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        <h1>Edit QQID: <%= opp.qqId %></h1>
+        <div class="row">   
+            <form action="/opps/<%= opp._id %>/?_method=PUT" method="post">
+                <div class="form-group">
+                    <input class="form-control" type="text" value="<%= opp.custName %>" name="opp[custNum]"></input>
+                    <p id="custName"></p>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" value="<%= opp.salesRep %>" name="opp[salesRep]"></input>
+                </div>
+               <div class="form-group">
+                    <input class="form-control" type="text" value="<%= opp.closeDate %>" name="opp[closeDate]"></input>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" value="<%= opp.oppName %>" name="opp[oppName]"></input>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" value="<%= opp.address %>" name="opp[address]"></input>
+                </div>
+                <div class="form-group" data-style="btn-info">
+                    <select class="form-control" name="opp[qqType]">
+                        <% 
+                        let optionsQqType = ["addressOnly", "sketch", "blueprints", "other"]
+                        let textShowQqType = ["Address Only", "Sketch", "Blueprints", "Other"]
+                        for (var i=0; i<optionsQqType.length; i++){
+                            if(optionsQqType[i] == opp.qqType){ %>
+                                <option value="<%= optionsQqType[i] %>" selected> <%= textShowQqType[i] %> </option>
+                            <% } else { %>
+                                <option value="<%= optionsQqType[i] %>"> <%= textShowQqType[i] %> </option>
+                            <% } %>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" value="<%= opp.structure %>" name="opp[structure]"></input>
+                </div>
+                <div class="form-group form-inline" data-style="btn-info">
+                    <select class="form-control" name="opp[panel1]">
+                        <% 
+                        let optionsPanel1 = ["none", "GulfRib", "5VCrimp", "GulfLok", "GulfSeam", "VersaLoc", "MegaLoc", "GulfPBR", "GulfWave"]
+                        let textShowPanel1 = ["none", "GulfRib", "5V Crimp", "GulfLok", "GulfSeam", "VersaLoc", "MegaLoc", "GulfPBR", "GulfWave"]
+                        for (var i=0; i<optionsPanel1.length; i++){
+                            if(optionsPanel1[i] == opp.panel1){ %>
+                                <option value="<%= optionsPanel1[i] %>" selected> <%= textShowPanel1[i] %> </option>
+                            <% } else { %>
+                                <option value="<%= optionsPanel1[i] %>"> <%= textShowPanel1[i] %> </option>
+                            <% } %>
+                        <% } %>                      
+                    </select>
+                    Coverage:
+                    <select class="form-control" name="opp[panel1Coverage]">
+                        <!--JS fills this in-->
+                        <option value="<%= opp.panel1Coverage %>\"><%= opp.panel1Coverage %></option>
+                    </select>
+                    Hem: 
+                    <select class="form-control" type="text" name="opp[hem]">
+                        <% 
+                        let optionsHem = ["NA", "2\"", "3\"", "1\""]
+                        let textShowHem = ["NA", "2\"", "3\"", "1\""]
+                        for (var i=0; i<optionsHem.length; i++){
+                            if(optionsHem[i] == opp.qqType){ %>
+                                <option value="<%= optionsHem[i] %>" selected> <%= textShowHem[i] %> </option>
+                            <% } else { %>
+                                <option value="<%= optionsHem[i] %>"> <%= textShowHem[i] %> </option>
+                            <% } %>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group form-inline" data-style="btn-info">
+                    <select class="form-control" name="opp[panel2]">
+                      <option value="">Alt Panel if desired</option>
+                      <option value="GulfRib">GulfRib</option>
+                      <option value="5VCrimp">5V Crimp</option>
+                      <option value="GulfLok">GulfLok</option>
+                      <option value="GulfSeam">GulfSeam</option>
+                      <option value="VersaLoc">VersaLoc</option>
+                      <option value="MegaLoc">MegaLoc</option>
+                      <option value="GulfPBR">GulfPBR</option>
+                      <option value="GulfWave">GulfWave</option>
+                    </select>
+                    <select class="form-control" name="opp[panel2Coverage]">
+                        <!--JS fills this in-->
+                    </select>
+                </div>
+                    <button class="btn btn-md btn-primary btn-block">Submit</button>
+                </div>
+            </form>
+        
+        </div>
+
+<script src="/js/oppsedit.js"></script>
+
+<% include ../partials/footer %>

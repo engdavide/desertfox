@@ -1,7 +1,8 @@
 const   express = require('express'),
         request = require('express'),
         bodyParser = require('body-parser'),
-        mongoose = require('mongoose');
+        mongoose = require('mongoose'),
+        methodOverride = require('method-override');
         
 const   Opps = require('./models/opps'),
         Custs = require('./models/custs'),
@@ -16,6 +17,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
 
 mongoose.connect("mongodb://localhost/desertfox");
 

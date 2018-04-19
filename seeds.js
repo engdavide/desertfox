@@ -32,6 +32,19 @@ function seedDB(){
         let month = faker.date.future().getMonth();
         let year = faker.date.future().getFullYear();
         let dateIn = month + date + year
+        
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth()+1; //January is 0!
+        let yyyy = today.getFullYear();
+        if(dd<10) {
+            dd = '0'+dd
+        } 
+        if(mm<10) {
+            mm = '0'+mm
+        } 
+        today = mm + '/' + dd + '/' + yyyy;
+        
         Opps.create({
             qqId: faker.finance.account(),
             custName: faker.company.companyName(),
@@ -43,9 +56,11 @@ function seedDB(){
             qqType: "address only",
             structure: "main house",
             panel1: "GulfRib",
-            panel1Coverage: "36\"",
+            panel1Coverage: "36",
             panel2: "",
-            hem: "N/A"
+            hem: "N/A",
+            status: [{name: "Submitted",
+                    time: today}]
         })
     };
 };

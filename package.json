@@ -21,6 +21,7 @@
     "datatables.net": "^1.10.16",
     "ejs": "^2.5.8",
     "express": "^4.16.3",
+    "method-override": "^2.3.10",
     "mongoose": "^5.0.15",
     "request": "^2.85.0",
     "requirejs": "^2.3.5"
