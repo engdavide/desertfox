@@ -2,7 +2,8 @@ const   express = require('express'),
         router = express.Router();
         
 const   Opps = require('../models/opps'),
-        Custs = require('../models/custs');
+        Custs = require('../models/custs'),
+        Notes = require('../models/notes');
         
 router.get("/opps", function(req,res){
     Opps.find({}, function(err, allOpps){
@@ -46,6 +47,16 @@ router.get("/opps/new", function(req,res){
         }
     });
 });
+
+router.get("/opps/:id", function(req, res) {
+    Opps.findById(req.params.id).populate("notes").exec(function(err, foundOpp){
+        if(err) {
+            console.log(err);
+        } else {
+            res.render('opps/show', {opp: foundOpp})
+        }
+    })
+})
 
 
 module.exports = router;

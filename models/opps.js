@@ -1,7 +1,9 @@
 const   mongoose = require('mongoose');
 
 let oppsSchema = new mongoose.Schema({
+    qqId: String,
     custNum: String,
+    custName: String,
     salesRep: String,
     closeDate: String,
     oppName: String,
@@ -14,7 +16,12 @@ let oppsSchema = new mongoose.Schema({
     panel2Coverage: String,
     hem: String,
     timeIn: String,
-    timeout: String
+    timeout: String,
+    notes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Notes"
+        }]
     //TODO: Add user and comment associations...
     
     

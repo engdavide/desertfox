@@ -20,22 +20,23 @@
 
         <table id="opp-table" class="table table-striped table-bordered">
             <thead>
-                <th>Customer Num</th>
+                <th>Customer</th>
                 <th>Rep</th>
                 <th>Close Date</th>
-                <th>Project Name</th>
+                <th>Project</th>
                 <th>QQ Type</th>
                 <th>Address</th>
                 <th>Structure</th>
                 <th>Panel1</th>
                 <th>Panel2</th>
                 <th>Hem</th>
+                <th>Notes</th>
             </thead>
             <tbody>
                 <!--Opps model passed as opps from routes/opp.js-->
                 <% opps.forEach(function(opps){ %>
                     <tr>
-                        <td><%= opps.custNum %></td>
+                        <td><%= opps.custName %></td>
                         <td><%= opps.salesRep %></td>
                         <td><%= opps.closeDate %></td>
                         <td><%= opps.oppName %></td>
@@ -45,6 +46,7 @@
                         <td><%= opps.panel1 %></td>
                         <td><%= opps.panel2 %></td>
                         <td><%= opps.hem %></td>
+                        <td> <a href="/opps/<%= opps._id %>" class="btn btn-primary btn-sm">Notes/More</a></td>
                     </tr>
                     <% }) %>
                 

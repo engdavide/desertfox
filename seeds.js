@@ -20,7 +20,7 @@ function seedDB(){
             console.log('removed opps')
         }
     });
-    for(let i=0; i<5; i++){
+    for(let i=0; i<50; i++){
         Custs.create({
             num: i,
             name: faker.company.companyName()
@@ -33,6 +33,8 @@ function seedDB(){
         let year = faker.date.future().getFullYear();
         let dateIn = month + date + year
         Opps.create({
+            qqId: faker.finance.account(),
+            custName: faker.company.companyName(),
             custNum: i, 
             salesRep: faker.name.firstName(),
             closeDate: dateIn, 
@@ -41,6 +43,7 @@ function seedDB(){
             qqType: "address only",
             structure: "main house",
             panel1: "GulfRib",
+            panel1Coverage: "36\"",
             panel2: "",
             hem: "N/A"
         })

@@ -7,7 +7,7 @@ let coverage2Select = document.querySelector('select[name="coverage2"]');
 let custNumSelect = document.querySelector('input[name="custNum"]');
 let custNameOut = document.querySelector('#custName');
 
-//Custs passed as custs from routes/opps.js
+//Custs passed as custs from routes/opps.js...but not getting to this JS file. need to fix... TODO
 custNumSelect.addEventListener('change', function (){
     let cust = getCustNum();
     custNameOut.textContent = cust.name

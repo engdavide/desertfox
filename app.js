@@ -5,10 +5,12 @@ const   express = require('express'),
         
 const   Opps = require('./models/opps'),
         Custs = require('./models/custs'),
+        Notes = require('./models/notes'),
         seedDB = require('./seeds');
 
-const   oppsRoutes = require('./routes/opps');
-const   indexRoutes = require('./routes/index');
+const   oppsRoutes = require('./routes/opps'),
+        indexRoutes = require('./routes/index'),
+        notesRoutes = require('./routes/notes');
 
 const app = express();
 app.set("view engine", "ejs");
@@ -26,6 +28,7 @@ seedDB();
 
 app.use(oppsRoutes);
 app.use(indexRoutes);
+app.use(notesRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
         console.log("It's alive!");

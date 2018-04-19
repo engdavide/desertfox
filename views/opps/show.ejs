@@ -1,0 +1,44 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div>
+                <p>QQID: <strong><%= opp.qqId  %></strong></p>
+                <p>Customer: <%= opp.custName %> </p>
+                <p>Job Name: <%= opp.oppName %> Address: <%= opp.address %></p>
+                <p>QQ type: <% opp.qqType %> Structures included: <%= opp.structure %></p>
+                <p>Panel: <%= opp.panel1 %> Coverage: <%= opp.panel1Coverage %> Hem: <%= opp.hem %></p>
+                <% if(opp.panel2){ %>
+                    <p>Alternate Panel: <%= opp.panel2 %> Coverage: <%= opp.panel2Coverage %> </p>
+                <% } %>
+                <p>
+                    Time Submitted: <%= opp.timeIn %> 
+                    <% if(opp.timeout){ %>
+                        Time Out: <%= opp.timeout %>
+                    <% } %>
+                </p>
+        
+    </div>
+    
+    <div class="well">
+        <p class="text-right">
+            <a href="/opps/<%= opp._id %>/notes/new" class="btn btn-success">Add a Note</a>
+        </p>
+        <hr>
+            <% opp.notes.forEach(function(notes){ %>
+                <div class="row">
+                    <div class="col-md-12">
+                        <strong><%= notes.author %></strong>
+                        <span class="pull-right">DATE</span>
+                        <p> <%= notes.text %></p>
+                    </div>
+                
+                </div>   
+            <% }) %>
+
+        
+        
+    </div>
+</div>
+
+
+<% include ../partials/footer %>
