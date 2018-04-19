@@ -138,16 +138,13 @@
     
     //Custs passed as custs from routes/opps.js...
 
-    custNumSelect.change( function(){
-        let cust = getCustNum();
+    custNumSelect.change(function(){
+        let cust = custs.find({'num': custNumSelect.value}, function(err, res){
+        })
         console.log(custs)
         custNameOut.textContent = cust.name
     });    
-    function getCustNum(){
-        return custs.find({'num': custNumSelect.value}, function(err, res){
-        })
-    };
-    
+
 </script>
 
 
