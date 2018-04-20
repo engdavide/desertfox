@@ -17,7 +17,7 @@ router.get("/opps", function(req,res){
 });
 
 //CREATE
-router.post("/opps", function(req,res){
+router.post("/opps", isLoggedIn, function(req,res){
     let newOpp = {  custNum: req.body.custNum, 
                     salesRep: req.body.salesRep, 
                     closeDate: req.body.closeDate, 
@@ -40,7 +40,7 @@ router.post("/opps", function(req,res){
 });
 
 //NEW
-router.get("/opps/new", function(req,res){
+router.get("/opps/new", isLoggedIn, function(req,res){
     Custs.find({}, function(err, allCusts){
         if(err){
             console.log(err);
@@ -63,7 +63,7 @@ router.get("/opps/:id", function(req, res) {
 })
 
 //EDIT
-router.get("/opps/:id/edit", function(req, res){
+router.get("/opps/:id/edit", isLoggedIn, function(req, res){
     Opps.findById(req.params.id, function(err, foundOpp){
         if(err){
             console.log(err);
@@ -75,7 +75,7 @@ router.get("/opps/:id/edit", function(req, res){
 });
 
 //UPDATE
-router.put("/opps/:id", function(req, res){
+router.put("/opps/:id", isLoggedIn, function(req, res){
     Opps.findByIdAndUpdate(req.params.id, req.body.opp, function(err, updatedOpp){
         if(err){
             res.redirect("/opps");
@@ -86,6 +86,11 @@ router.put("/opps/:id", function(req, res){
     })
 })
 
-
+function isLoggedIn(req,res,next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect('/login');
+}
 
 module.exports = router;

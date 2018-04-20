@@ -2,7 +2,8 @@ const   mongoose = require('mongoose'),
         faker = require('faker');
 
 const   Custs = require('./models/custs'),
-        Opps = require('./models/opps');
+        Opps = require('./models/opps'),
+        Users = require('./models/users');
 
 
 function seedDB(){
@@ -13,13 +14,21 @@ function seedDB(){
             console.log('removed customers')
         }
     });
-        Opps.remove({}, function(err){
+    Opps.remove({}, function(err){
         if(err){
             console.log(err)
         } else {
             console.log('removed opps')
         }
     });
+    Users.remove({}, function(err){
+        if(err){
+            console.log(err)
+        } else {
+            console.log('removed opps')
+        }
+    });
+    
     for(let i=0; i<2; i++){
         Custs.create({
             num: i,
@@ -63,6 +72,29 @@ function seedDB(){
                     time: today}]
         })
     };
+
+        Users.create({
+            username: "admin",
+            password: "password",
+            role: "admin",
+            initials: "AA"
+        });
+        
+        Users.create({
+            username: "sales",
+            password: "password",
+            role: "sales",
+            initials: "SS"
+        });
+        
+        Users.create({
+            username: "cad",
+            password: "password",
+            role: "cad",
+            initials: "CC"
+        });
+    
+    
 };
 
 module.exports = seedDB;

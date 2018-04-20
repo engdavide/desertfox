@@ -1,17 +1,19 @@
 const   mongoose = require("mongoose");
 
+const   Users =require('../models/users')
+
 let notesSchema = mongoose.Schema({
     text: String,
-    author: String
-    // TODO Associate to user
+    author: {
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Users"
+            },
+            username: String
+            }
 })
 
 module.exports = mongoose.model("Notes", notesSchema)
 
 
 
-// author: {
-//         id: {
-//             type: mongoose.Schema.Types.ObjectId,
-//             ref: "User"
-//         },

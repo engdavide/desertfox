@@ -1,0 +1,93 @@
+<% include ../partials/header %>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+<!--Styling-->
+<link rel-"stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></link>
+
+<div class="container">
+    <h1>All opps...</h1>
+    <!-- TODO jumbotron here-->
+</div>
+
+
+    <div class="container">
+        
+        
+
+        <table id="user-table" class="table table-striped table-bordered">
+            <thead>
+                <th>Username</th>
+                <th>Initials</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                <!--Opps model passed as opps from routes/opp.js-->
+                <% users.forEach(function(users){ %>
+                    <tr>
+                        <td><%= users.username %></td>
+                        <td><%= users.initials %></td>
+                        <td><%= users.role %></td>
+                        <td> 
+                            <% if(!currentUser) { %> 
+                            <% } else { %>
+                                <a href="/users/<%= users._id %>/edit"><i class="fas fa-edit"></i></a>
+                            <% } %>
+                            
+                        </td>
+                    </tr>
+                    <% }) %>
+                
+            </tbody>
+        </table>
+    </div>
+
+<div class="container">
+    <a class='btn btn-primary btn-md' href='/users/new'>Add new User</a>
+    <hr>
+    <a href='/'>go home</a>
+</div>
+
+
+
+
+
+<!--Search Bar-->
+<script>
+    $(document).ready(function() {
+    $('#user-table').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );
+</script>
+
+<!--Hide/Show cols-->
+<script>>
+
+</script>
+
+
+<% include ../partials/footer %>

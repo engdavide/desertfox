@@ -24,7 +24,9 @@ router.post('/opps/:id/notes', function(req,res){
                                 if(err){
                                         console.log(err);
                                 }  else {
-                                        //TODO associate to user
+                                        note.author.id = req.user._id;
+                                        note.author.username = req.user.username;
+                                        note.save();
                                         opp.notes.push(note);
                                         opp.save();
                                         res.redirect("/opps/" + opp._id);
