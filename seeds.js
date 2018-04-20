@@ -11,25 +11,22 @@ function seedDB(){
         if(err){
             console.log(err)
         } else {
-            console.log('removed customers')
         }
     });
     Opps.remove({}, function(err){
         if(err){
             console.log(err)
         } else {
-            console.log('removed opps')
         }
     });
     Users.remove({}, function(err){
         if(err){
             console.log(err)
         } else {
-            console.log('removed opps')
         }
     });
     
-    for(let i=0; i<2; i++){
+    for(let i=0; i<50; i++){
         Custs.create({
             num: i,
             name: faker.company.companyName()
@@ -97,4 +94,5 @@ function seedDB(){
     
 };
 
+console.log("seeded")
 module.exports = seedDB;

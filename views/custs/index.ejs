@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></link>
 
 <div class="container">
-    <h1>All quotes...</h1>
+    <h1>All customers...</h1>
     <!-- TODO jumbotron here-->
 </div>
 
@@ -18,20 +18,23 @@
         
         
 
-        <table id="quote-table" class="table table-striped table-bordered">
+        <table id="cust-table" class="table table-striped table-bordered">
             <thead>
-                <th>Price</th>
-                <th>Actions</th>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Action</th>
             </thead>
             <tbody>
-                <!-- Quotes model passed as quotes from routes/quotes.js-->
-                <% quotes.forEach(function(quotes){ %>
+                <!-- Custs model passed as custs from routes/custs.js-->
+                <% custs.forEach(function(custs){ %>
                     <tr>
-                        <td><%= quotes.totalPrice %></td>
+                        <td><%= custs.name %></td>
+                        <td><%= custs.num %></td>
                         <td> 
                             <% if(!currentUser) { %> 
                             <% } else { %>
-                                <a href="/quotes/<%= quotes._id %>/edit"><i class="fas fa-edit"></i></a>
+                                <a href="/opps/new"><i class="fas fa-plus"></i></a>
+                                <!--Use jquery or something to make this button dynamic-->
                             <% } %>
                         </td>
                     </tr>
@@ -42,7 +45,7 @@
     </div>
 
 <div class="container">
-    <a class='btn btn-primary btn-md' href='/quotes/new'>Add new quote</a>
+    <!--<a class='btn btn-primary btn-md' href='/quotes/new'>Add new quote</a>-->
     <hr>
     <a href='/'>go home</a>
 </div>
@@ -54,7 +57,7 @@
 <!--Search Bar-->
 <script>
     $(document).ready(function() {
-    $('#quote-table').DataTable( {
+    $('#cust-table').DataTable( {
         initComplete: function () {
             this.api().columns().every( function () {
                 var column = this;

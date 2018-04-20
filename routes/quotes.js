@@ -19,7 +19,7 @@ router.get("/quotes", function(req,res){
 
 //CREATE
 router.post("/quotes", isLoggedIn, function(req,res){
-    let newQuote = {totalPrice: req.body.totalPrice 
+    let newQuote = {totalPrice: req.body.totalPrice, 
     };
         Quotes.create(newQuote, function(err, newlyCreated){
             if(err){

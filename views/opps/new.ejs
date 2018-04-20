@@ -134,28 +134,33 @@
 </script>    
 
 
-<%
-let custsAll = [];
-for(let i = 0; i < 10; i++){
-    if(custs[i]){
-        let custName = "\"" + custs[i].name + "\"";
-        let custNum = "\"" + custs[i].name + "\"";
-        custsAll.push({"name":custName, "num":custNum});
-    } else {
-        break
-    }
-};
-%>
-
-<script>    
-    let custNumSelect = $('input[name="custNum"]');
-    let custNameOut = $('#custName'); 
-    let custsAllJs = "<%= custsAll %>";
-    console.log(custsAllJs[custNumSelect.val()])
-    custNumSelect.change(function(){
-        console.log('change')
+<script>
+    // AJAX call to GET name from num
+    
+    let custNum = $('input[name="custNum"]')
+    let custName = $('#custName')
+    custNum.change(function(){
+        console.log('change!')
+        console.log($(this).val())
+        $.ajax({
+            type: 'POST',
+            url: '/df',
+            data: {
+                custNum: $(this).val(),
+            },
+            success: function(data){
+                console.log(data);
+                custName.text(data);
+            },
+            error: function(){
+                console.log('no data')
+            }
+        });
     })
-        //Custs passed as custs from routes/opps.js...
+
+
+
+
 </script>
 
 

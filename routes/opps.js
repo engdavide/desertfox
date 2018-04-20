@@ -86,6 +86,22 @@ router.put("/opps/:id", isLoggedIn, function(req, res){
     })
 })
 
+
+
+//AJAX
+router.post('/df', function(req,res){
+    Custs.findOne({'num':req.body.custNum},function(err, foundItem){
+        if(err){
+            console.log(err);
+        } else {
+            res.send(foundItem.name);
+
+        }
+    });
+});
+
+
+
 function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
         return next();

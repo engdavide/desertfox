@@ -17,6 +17,7 @@ const   oppsRoutes = require('./routes/opps'),
         indexRoutes = require('./routes/index'),
         notesRoutes = require('./routes/notes'),
         usersRoutes = require('./routes/users'),
+        custsRoutes = require('./routes/custs'),
         quotesRoutes = require('./routes/quotes');
 
 const app = express();
@@ -57,6 +58,7 @@ app.use(indexRoutes);
 app.use(notesRoutes);
 app.use(usersRoutes);
 app.use(quotesRoutes);
+app.use(custsRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
         console.log("It's alive!");
