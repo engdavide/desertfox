@@ -20,7 +20,7 @@ function seedDB(){
             console.log('removed opps')
         }
     });
-    for(let i=0; i<50; i++){
+    for(let i=0; i<2; i++){
         Custs.create({
             num: i,
             name: faker.company.companyName()

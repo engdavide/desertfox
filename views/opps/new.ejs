@@ -131,21 +131,34 @@
                                     '<option value="14\"">14"</option>') ;
         }
     }); 
-    
-    
+</script>    
+
+
+<%
+let custsAll = [];
+for(let i = 0; i < 10; i++){
+    if(custs[i]){
+        let custName = "\"" + custs[i].name + "\"";
+        let custNum = "\"" + custs[i].name + "\"";
+        custsAll.push({"name":custName, "num":custNum});
+    } else {
+        break
+    }
+};
+%>
+
+<script>    
     let custNumSelect = $('input[name="custNum"]');
-    let custNameOut = $('#custName');    
-    
-    //Custs passed as custs from routes/opps.js...
-
+    let custNameOut = $('#custName'); 
+    let custsAllJs = "<%= custsAll %>";
+    console.log(custsAllJs[custNumSelect.val()])
     custNumSelect.change(function(){
-        let cust = custs.find({'num': custNumSelect.value}, function(err, res){
-        })
-        console.log(custs)
-        custNameOut.textContent = cust.name
-    });    
-
+        console.log('change')
+    })
+        //Custs passed as custs from routes/opps.js...
 </script>
+
+
 
 
 <% include ../partials/footer %>
