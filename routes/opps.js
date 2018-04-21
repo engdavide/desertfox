@@ -28,12 +28,15 @@ router.post("/opps", isLoggedIn, function(req,res){
                     panel1: req.body.panel1,
                     panel2: req.body.panel2,
                     hem: req.body.hem,
+                    author: {
+                        id: req.body.author._id,
+                        initials: req.body.author.initials,
+                    },
     };
         Opps.create(newOpp, function(err, newlyCreated){
             if(err){
                 console.log(err);
             } else {
-                // TODO: Add associations here later
                 res.redirect("/opps");
             }
         });
@@ -41,15 +44,9 @@ router.post("/opps", isLoggedIn, function(req,res){
 
 //NEW
 router.get("/opps/new", isLoggedIn, function(req,res){
-    Custs.find({}, function(err, allCusts){
-        if(err){
-            console.log(err);
-        } else {
-            console.log(allCusts)
-            res.render("opps/new", {custs: allCusts});
-        }
-    });
+            res.render("opps/new");
 });
+
 
 //SHOW
 router.get("/opps/:id", function(req, res) {
@@ -95,7 +92,6 @@ router.post('/df', function(req,res){
             console.log(err);
         } else {
             res.send(foundItem.name);
-
         }
     });
 });

@@ -17,6 +17,13 @@ let oppsSchema = new mongoose.Schema({
     hem: String,
     timeIn: String,
     timeout: String,
+    author: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Users"
+            },
+        initials: String,
+        },
     status: [
         {
             name: String,

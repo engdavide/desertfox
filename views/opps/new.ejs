@@ -13,7 +13,7 @@
                     <p id="custName"></p>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Sales Rep Name" name="salesRep"></input>
+                    <input class="form-control" type="text" placeholder="Rep initials" value="<%= currentUser.initials %>" name="salesRep"></input>
                 </div>
                <div class="form-group">
                     <input class="form-control" type="text" placeholder="Close Date" name="closeDate"></input>
@@ -75,17 +75,16 @@
                         <!--JS fills this in-->
                     </select>
                 </div>
+
+                <div class="form-group" data-style="btn-info">
                     <button class="btn btn-md btn-primary btn-block">Submit</button>
                 </div>
             </form>
+            
+
         
         </div>
-        
-        
-        
-        
-        
-        
+
         
     </div>
     

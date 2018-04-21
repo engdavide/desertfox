@@ -24,12 +24,30 @@
             <a href="/opps/<%= opp._id %>/notes/new" class="btn btn-success">Add a Note</a>
         </p>
         <hr>
-            <% opp.notes.forEach(function(notes){ %>
+            <% opp.notes.forEach(function(note){ %>
                 <div class="row">
                     <div class="col-md-12">
-                        <strong><%= notes.author.username %></strong>
-                        <span class="pull-right">DATE</span>
-                        <p> <%= notes.text %></p>
+                        <strong><%= note.author.username %></strong>
+                            <% var d = note.timeIn;
+                                var dd = d.getDate();
+                                var mm = d.getMonth() + 1; //Months are zero based
+                                var yyyy = d.getFullYear();
+                                if(dd<10) {
+                                    dd = '0'+dd
+                                } 
+                                if(mm<10) {
+                                    mm = '0'+mm
+                                } 
+                                let date = dd + "-" + mm + "-" + yyyy;
+                            %>
+                        <span class="pull-right"><%= date %></span>
+                        <p> <%= note.text %></p>
+                        <span>
+                            <% note.files.forEach(function(file){ %>
+                                <a href="../<%= file.url %>"> <%= file.name %> </a>
+                            <% }) %>
+
+                        </span>
                     </div>
                 
                 </div>   
@@ -39,6 +57,8 @@
         
     </div>
 </div>
+
+
 
 
 <% include ../partials/footer %>

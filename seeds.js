@@ -3,7 +3,8 @@ const   mongoose = require('mongoose'),
 
 const   Custs = require('./models/custs'),
         Opps = require('./models/opps'),
-        Users = require('./models/users');
+        Users = require('./models/users'),
+        Notes = require('./models/notes');
 
 
 function seedDB(){
@@ -19,7 +20,7 @@ function seedDB(){
         } else {
         }
     });
-    Users.remove({}, function(err){
+    Notes.remove({}, function(err){
         if(err){
             console.log(err)
         } else {
@@ -70,26 +71,6 @@ function seedDB(){
         })
     };
 
-        Users.create({
-            username: "admin",
-            password: "password",
-            role: "admin",
-            initials: "AA"
-        });
-        
-        Users.create({
-            username: "sales",
-            password: "password",
-            role: "sales",
-            initials: "SS"
-        });
-        
-        Users.create({
-            username: "cad",
-            password: "password",
-            role: "cad",
-            initials: "CC"
-        });
     
     
 };

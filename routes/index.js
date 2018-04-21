@@ -11,6 +11,16 @@ router.get("/", function(req,res){
     res.render("home");
 });
 
+//UPLOADS need to fix this....
+router.get('/public/uploads/:id', function(req,res){
+    let filename = req.params.id;
+    let path = __dirname
+    path = path.resolve(__dirname, '.../public/uploads/')
+    console.log(path);
+    console.log(filename);
+    res.sendFile(path+filename);
+})
+
 //REGISTER
 router.get('/register', function(req, res) {
     res.render('register');
