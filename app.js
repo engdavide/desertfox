@@ -1,3 +1,15 @@
+/*
+TODO:
+build new quote view/form
+tweak model for quotes
+and lines model if needed
+bring in SKU data--
+csv parser to json/mongo
+
+*/
+
+
+
 const   express = require('express'),
         request = require('request'),
         bodyParser = require('body-parser'),
@@ -28,6 +40,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 
+//Serve upload files
+app.use(express.static('public'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 //AUTH CONFIG HERE...
 app.use(require("express-session")({

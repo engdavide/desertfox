@@ -17,7 +17,7 @@ router.get("/opps/:id/notes/new", function(req,res){
 });
 
 
-let storage = multer.diskStorage({
+let notesStorage = multer.diskStorage({
         destination: function(req, file, cb){
                 cb(null, './public/uploads/');
         },
@@ -26,9 +26,9 @@ let storage = multer.diskStorage({
         }
 });
 
-let upload = multer({storage: storage}).array('files');
+let notesUpload = multer({storage: notesStorage}).array('files');
 
-router.post('/opps/:id/notes', upload, function(req,res,next){
+router.post('/opps/:id/notes', notesUpload, function(req,res,next){
         Opps.findById(req.params.id, function(err, opp){
                 if(err){
                         console.log(err);
@@ -47,8 +47,11 @@ router.post('/opps/:id/notes', upload, function(req,res,next){
                                         for(let i=0;i<req.files.length;i++){
                                                 let arr = {
                                                         "name": req.files[i].originalname,
-                                                        "url": req.files[i].path,
+                                                        "url": req.files[i].path.substring(7),
+                                                        //truncate to drop "/public" from the path
+                                                        //this matches the express.staic routes from app.js
                                                 }
+                                                console.log(arr);
                                                 note.files.push(arr);
                                         }
                                         note.save();
