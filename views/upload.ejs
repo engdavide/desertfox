@@ -1,3 +1,5 @@
+<!--BROKE the fetch button--look to use datatables here instead-->
+
 <% include ./partials/header %>
 
 <div class="container">
@@ -22,9 +24,12 @@
     <hr>
     <table>
         <thead>
-            <th>Product Name</th>
-            <th>Category</th>
-            <th>PRice</th>
+            <th>Stock Code</th>
+            <th>Color</th>
+            <th>Product Code</th>
+            <th>Metal Code</th>
+            <th>Price Code</th>
+            <th>Price</th>
             <th>Description</th>
         </thead>
         <tbody id="trdata">
@@ -47,7 +52,10 @@
             $("#message").hide();
             var string = '';
             $.each(products, function(index, product ) {
-                string += '<tr><td>'+(index+1)+'</td><td>'+product['name']+'</td><td>'+product['category']+'</td><td>'+product['price']+'</td><td>'+product['description']+'</td></tr>';
+                string += '<tr><td>'+(index+1)+'</td><td>'+product['stockCode']
+                    +'</td><td>'+product['colorCode']+'</td><td>'+product['productCode']
+                    +'</td><td>'+product['gauge']+'</td><td>'+product['priceCode']+'</td>+'</td><td>'
+                    +product['description']+'</td>+'</td></tr>';
             });
             $("#trdata").html(string);
         });

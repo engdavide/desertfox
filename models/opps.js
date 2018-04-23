@@ -36,7 +36,6 @@ let oppsSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Notes"
         }]
-    //TODO: Add user and comment associations...
     
     
 });

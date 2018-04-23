@@ -8,24 +8,21 @@ const   Users = require('../models/users'),
 let quotesSchema = new mongoose.Schema({
     quoteNum: Number,
     totalPrice: String,
-    lines: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Lines"
-        },
-        sku: String,
-        qty: Number,
+    substrate: String,
+    paint: String,
+    color: String,
+    ribHeight: String,
+    panelWidth: String,
+    lines: [
+        {
+        num: Number,
+        productCode: String,
+        stockCode: String,
+        quantity: Number,
         unitPrice: Number,
         extPrice: Number,
-        prodFamily: String,
-        substrate: Number,
-        coating: String,
-        color: String,
-        ribHeight: Number,
-        panWidth: Number,
-        comments: String,
-    },
-    
+        comments: String
+    }],
     opps: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

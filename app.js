@@ -2,19 +2,34 @@
 TODO:
         bring in SKU data--
         csv parser to json/mongo
-refine model and bring in real sku+price data from invMaster+
+        add email to user model
+        refine products model and bring in real sku+price data from invMaster+
+...update "fetch data" function to use data tables
+quote/lines/products model tweak
 build new quote view/form
 tweak model for quotes
+primary flag on quote, float value to opps
 tweak lines model if needed
 build ajax/jquery updates for quote form
-build upload csv option
+print to PDF function
+build upload csv option -- refactor upload routes/views?? Or upload routes within functional route page?
 implement parser
+customer upload
+destroy opps/models, only your own unless admin
+CAD comments
+self service flag on opps
 cleanup opps new
 cleanup opps index
 STYLE everything
+auth logic on all routes
+PW reset
 think through UI/UX
+analytics/timestamps for status
+notifications/email on status change
 
 DEMO
+
+DEPLOY
 
 */
 

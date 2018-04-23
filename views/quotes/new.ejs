@@ -8,6 +8,27 @@
     <div class="container">
         <div class="row">   
             <form action="/quotes" method="POST">
+                <div class="form-group form-inline" data-style="btn-info">
+                    <select class="form-control" name=quote[panel]">
+                      <option value="none">Panel</option>
+                      <option value="GulfRib">GulfRib</option>
+                      <option value="5VCrimp">5V Crimp</option>
+                      <option value="GulfLok">GulfLok</option>
+                      <option value="GulfSeam">GulfSeam</option>
+                      <option value="VersaLoc">VersaLoc</option>
+                      <option value="MegaLoc">MegaLoc</option>
+                      <option value="GulfPBR">GulfPBR</option>
+                      <option value="GulfWave">GulfWave</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" type="text" name="quote[substrate]">
+                        <option value="NA">NA</option>
+                        <option value='2"'>2"</option>
+                        <option value='3"'>3"</option>
+                        <option value='1"'>1</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <input class="form-control" type="text" placeholder="TotalPrice" name="totalPrice"></input>
                 </div>

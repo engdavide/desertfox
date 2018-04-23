@@ -33,10 +33,13 @@ router.get('/upload', function(req, res, next){
                 }
             });
             var item = new Products({
-                name: data[0],
-                category: data[1],
-                price: data[2],
-                description: data[3]
+                stockCode: data[0],
+                colorCode: data[1],
+                productCode: data[2],
+                gauge: data[3],
+                priceCode: data[4],
+                sellingPrice: data[5],
+                description: data[6],
             });
         item.save(function(err){
             if(err){
@@ -81,7 +84,7 @@ router.get('/register', function(req, res) {
 });
 
 router.post('/register', function(req,res){
-    let newUser = ({username: req.body.username});
+    let newUser = ({username: req.body.username, email: req.body.email});
     Users.register(newUser, req.body.password, function(err,userCB){
         if(err){
             console.log(err);
