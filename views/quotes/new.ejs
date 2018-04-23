@@ -9,7 +9,7 @@
         <div class="row">   
             <form action="/quotes" method="POST">
                 <div class="form-group form-inline" data-style="btn-info">
-                    <select class="form-control" name=quote[panel]">
+                    <select class="form-control" name="quote[panel]">
                       <option value="none">Panel</option>
                       <option value="GulfRib">GulfRib</option>
                       <option value="5VCrimp">5V Crimp</option>
@@ -23,33 +23,211 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control" type="text" name="quote[substrate]">
-                        <option value="NA">NA</option>
-                        <option value='2"'>2"</option>
-                        <option value='3"'>3"</option>
-                        <option value='1"'>1</option>
+                        <option value='29'>29</option>
+                        <option value='26'>26</option>
+                        <option value='26K'>26K</option>
+                        <option value='24'>24</option>
+                        <option value='32'>032</option>
+                        <option value='40'>040</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" placeholder="TotalPrice" name="totalPrice"></input>
+                    <select class="form-control" type="text" placeholder="paint" name="quote[paint]">
+                        <option value="GLM">GLM</option>
+                        <option value="SMP">SMP</option>
+                        <option value="Kynar">Kynar</option>
+                    </select>
                 </div>
-               <div class="form-group">
-                    <input class="form-control" type="text" placeholder="sku" name="sku"></input>
+                <div class="form-group">
+                    <select class="form-control" type="text" name="quote[color]">
+                        <option value="GLM">GLM</option>
+                        <!--JQUERY will do this part...-->
+                    </select>
                 </div>
+                <div class="form-group form-inline" id="ssPanelDetails">
+                    <!--JQUERY to add rib height and pan width here DON'T need rib height-->
+                </div>
+                <div class="form-group form-inline" id="lines">
+                    <button class="btn btn-info add-line" type="button"><i class="fas fa-plus"></i></button>
+                    <!--JQUERY to add LINES here-->
+                </div>
+                    <!--TODO: make not visible until first line added-->
+                    <button class="btn btn-info add-line" type="button"><i class="fas fa-plus"></i></button>
             </form>
-
-        
         </div>
-        
-        
-        
-        
-        
-        
-        
     </div>
 
 
+<script>
+    //LINES!!
+    let linesSelect = $('#lines');
+    let btnLinesAdd = $('.add-line');
+    let cntLines = 0
+    
+    btnLinesAdd.click(function(){
+       linesSelect.append('<input class="form-control quantity" type="text" placeholder="Qty" name="quote[lines['+ cntLines +'][quantity]]"></input>' +
+                               '<input class="form-control product-code" type="text" placeholder="Prod.Code" name="quote[lines[' + cntLines + '][productCode]]"></input>' +
+                              '<input class="form-control stock-code" type="text" placeholder="SKU" name="quote[lines[' + cntLines + '][stockCode]]"></input>' +
+                              '<input class="form-control unit-price" type="text" placeholder="Price" name="quote[lines[' + cntLines + '][unitPrice]]" disabled></input>' +
+                              '<input class="form-control ext-price" type="text" placeholder="Total" name="quote[lines[' + cntLines + '][extPrice]]" disabled></input>' +
+                              '<p> <input class="form-control comments" type="text" placeholder="Comments" name="quote[lines[' + cntLines + '][commments]]"></input></p>'); 
+        cntLines++;
+    });
 
+</script>
+
+<script>
+    // AJAX call to GET SKU's and price data
+
+    $('.product-code').on("change", $('.stock-code'), function(){
+        console.log('change!')
+        console.log($(this).val())
+        // $.ajax({
+        //     type: 'POST',
+        //     url: '/df',
+        //     data: {
+        //         custNum: $(this).val(),
+        //     },
+        //     success: function(data){
+        //         console.log(data);
+        //         custName.text(data);
+        //     },
+        //     error: function(){
+        //         console.log('no data')
+        //     }
+        // });
+    });
+
+
+
+
+</script>
+
+
+<script>
+    //COLORS
+    //TODO put this in a DB table, not hard coded.... :/
+    let SMP = [{"code" :'PAI',"color":'PAI (PAINT)'},
+                {"code" :'BLA',"color":'BLA (BLACK)'},
+                {"code" :'BAR',"color":'BAR (BARN RED)'},
+                {"code" :'BUR',"color":'BUR (BURGUNDY)'},
+                {"code" :'BRO',"color":'BRO (BRONZE)'},
+                {"code" :'COB',"color":'COB (COCOA BROWN)'},
+                {"code" :'CHA',"color":'CHA (CHARCOAL)'},
+                {"code" :'CLA',"color":'CLA (CLAY)'},
+                {"code" :'MEC',"color":'MEC (METALLIC COPPER)'},
+                {"code" :'EVE',"color":'EVE (EVERGREEN)'},
+                {"code" :'FOG',"color":'FOG (FOREST GREEN)'},
+                {"code" :'GAB',"color":'GAB (GALLERY BLUE)'},
+                {"code" :'GLM',"color":'GLM (GALVALUME)'},
+                {"code" :'GLZ',"color":'GLZ (GALVANIZED)'},
+                {"code" :'HAB',"color":'HAB (HAWAIIAN BLUE)'},
+                {"code" :'IVO',"color":'IVO (IVORY)'},
+                {"code" :'LIG',"color":'LIG (LIGHT GRAY)'},
+                {"code" :'LIS',"color":'LIS (LIGHT STONE)'},
+                {"code" :'MAG',"color":'MAG (MARINE GREEN)'},
+                {"code" :'MOT',"color":'MOT (MOCHA TAN)'},
+                {"code" :'PAG',"color":'PAG (PATINA GREEN)'},
+                {"code" :'POW',"color":'POW (POLAR WHITE)'},
+                {"code" :'PAR',"color":'PAR (PATRIOT RED)'},
+                {"code" :'PUW',"color":'PUW (PURE WHITE)'},
+                ]
+    let kynar = [{"code" :'PAI',"color":'PAI (PAINT)'},
+                {"code" :'AGC',"color":'CAM (CAMO)'},
+                {"code" :'ASG',"color":'AGC (AGED COPPER)'},
+                {"code" :'BRB',"color":'ASG (ASH GRAY)'},
+                {"code" :'BRR',"color":'BRB (BROOK BLUE)'},
+                {"code" :'BUR',"color":'BRR (BRITE RED)'},
+                {"code" :'CHG',"color":'BUR (BURGUNDY)'},
+                {"code" :'COP',"color":'CHG (CHARCOAL GRAY)'},
+                {"code" :'COR',"color":'COP (COPPER)'},
+                {"code" :'COS',"color":'COR (COLONIAL RED)'},
+                {"code" :'DAB',"color":'COS (COBALT STONE)'},
+                {"code" :'EVE',"color":'DAB (DARK BRONZE)'},
+                {"code" :'GLM',"color":'EVE (EVERGREEN)'},
+                {"code" :'HAG',"color":'GLM (GALVALUME)'},
+                {"code" :'HEG',"color":'HAG (HARTFORD GREEN)'},
+                {"code" :'MBK',"color":'HEG (HEMLOCK GREEN)'},
+                {"code" :'MBN',"color":'MBK (MATTE BLACK)'},
+                {"code" :'MEB',"color":'MBN (MANSARD BROWN)'},
+                {"code" :'NAC',"color":'MEB (MEDIUM BRONZE)'},
+                {"code" :'NES',"color":'NAC (NAPA CHAMPAGNE )'},
+                {"code" :'PAB',"color":'NES (NEVADA SILVER)'},
+                {"code" :'PAG',"color":'PAB (PACIFIC BLUE)'},
+                {"code" :'PAI',"color":'PAG (PATINA GREEN)'},
+                {"code" :'PRG',"color":'PAI (PAINT)'},
+                {"code" :'RER',"color":'PRG (PRE-WEATHERED GALVALUME)'},
+                {"code" :'REW',"color":'RER (REGAL RED)'},
+                {"code" :'SAN',"color":'REW (REGAL WHITE)'},
+                {"code" :'SIT',"color":'SAN (SANDSTONE)'},
+                {"code" :'SLG',"color":'SIT (SIERRA TAN)'},
+                {"code" :'SOW',"color":'SLG (SLATE GRAY)'},
+                {"code" :'STW',"color":'SOW (SOLAR WHITE)'},
+                {"code" :'TEA',"color":'STW (STONE WHITE)'},
+                {"code" :'TEC',"color":'TEA (WOOD DUCK TEAL)'},
+                ]
+    
+    let paintSelect = $('select[name="quote[paint]"]');
+    let colorSelect = $('select[name="quote[color]"]');
+    paintSelect.change(function(){
+        if($(this).val()=="GLM"){
+            colorSelect.html('<option value="GLM">GLM</option>');
+        } else if($(this).val()=="SMP") {
+            colorSelect.html('')
+            SMP.forEach(function(color){
+                colorSelect.append('<option value='+ color.code + '>' + color.color + '</option>')
+                });
+        } else if($(this).val()=="Kynar") {
+            colorSelect.html('')
+            kynar.forEach(function(color){
+                colorSelect.append('<option value='+ color.code + '>' + color.color + '</option>')
+                });
+        }
+    }); 
+</script>
+
+<script>
+    // rib height and pan width
+    // Refactor this...it's bad
+    let panelSelect = $('select[name="quote[panel]"]');
+    let ssPanelDetailsSelect = $('#ssPanelDetails');
+    panelSelect.change(function(){
+        if($(this).val()=="GulfLok"){
+            ssPanelDetailsSelect.html('Rib Height: <select class="form-control" type="text" name="ribHeight">' +
+                                '<option value="100" selected> 1.00 inch</option> ' +
+                                '</select>'+
+                                'Panel Width: <select class="form-control" type="text" name="panelWidth">' +
+                                '<option value="16" selected> 16 inch </option>'+
+                                '<option value="12"> 12 inch </option>' +
+                                '</select>');
+        } else if($(this).val()=="GulfSeam"){
+            ssPanelDetailsSelect.html('Rib Height: <select class="form-control" type="text" name="ribHeight">' +
+                                '<option value="175" selected> 1.75 inch</option> ' +
+                                '</select>'+
+                                'Panel Width: <select class="form-control" type="text" name="panelWidth">' +
+                                '<option value="16" selected> 16 inch </option>'+
+                                '<option value="18"> 18 inch </option>' +
+                                '<option value="12"> 12 inch </option>' +
+                                '</select>');
+        } else if($(this).val()=="VersaLoc"){
+            ssPanelDetailsSelect.html('Rib Height: <select class="form-control" type="text" name="ribHeight">' +
+                                '<option value="150" selected> 1.50 inch</option> ' +
+                                '</select>'+
+                                'Panel Width: <select class="form-control" type="text" name="panelWidth">' +
+                                '<option value="16" selected> 16 inch </option>'+
+                                '<option value="18"> 18 inch </option>' +
+                                '</select>');
+        } else if($(this).val()=="MegaLoc"){
+            ssPanelDetailsSelect.html('Rib Height: <select class="form-control" type="text" name="ribHeight">' +
+                                '<option value="200" selected> 1.50 inch</option> ' +
+                                '</select>'+
+                                'Panel Width: <select class="form-control" type="text" name="panelWidth">' +
+                                '<option value="16" selected> 16 inch </option>'+
+                                '<option value="18"> 18 inch </option>' +
+                                '</select>');
+        }
+    }); 
+</script>
 
 
 <% include ../partials/footer %>

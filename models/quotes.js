@@ -8,6 +8,7 @@ const   Users = require('../models/users'),
 let quotesSchema = new mongoose.Schema({
     quoteNum: Number,
     totalPrice: String,
+    panel: String,
     substrate: String,
     paint: String,
     color: String,
