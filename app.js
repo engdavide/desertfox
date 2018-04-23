@@ -1,10 +1,20 @@
 /*
 TODO:
+        bring in SKU data--
+        csv parser to json/mongo
+refine model and bring in real sku+price data from invMaster+
 build new quote view/form
 tweak model for quotes
-and lines model if needed
-bring in SKU data--
-csv parser to json/mongo
+tweak lines model if needed
+build ajax/jquery updates for quote form
+build upload csv option
+implement parser
+cleanup opps new
+cleanup opps index
+STYLE everything
+think through UI/UX
+
+DEMO
 
 */
 
