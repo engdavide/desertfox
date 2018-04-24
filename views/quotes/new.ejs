@@ -5,7 +5,7 @@
 
 </div>
 
-    <div class="container">
+    <div class="container form-lines">
         <div class="row">   
             <form action="/quotes" method="POST">
                 <div class="form-group form-inline" data-style="btn-info">
@@ -82,6 +82,7 @@
                               '<input class="form-control quantity" type="text" placeholder="Qty" name="quote[lines['+ cntLines +'][quantity]]"></input>' +
                               '<input class="form-control product-code" type="text" placeholder="Prod.Code" name="quote[lines[' + cntLines + '][productCode]]"></input>' +
                               '<input class="form-control stock-code" type="text" placeholder="SKU" name="quote[lines[' + cntLines + '][stockCode]]"></input>' +
+                              '<input class="form-control description" type="text" placeholder="description" name="quote[lines[' + cntLines + '][description]]" disabled></input>' +
                               '<input class="form-control unit-price" type="text" placeholder="Price" name="quote[lines[' + cntLines + '][unitPrice]]" disabled></input>' +
                               '<input class="form-control ext-price" type="text" placeholder="Total" name="quote[lines[' + cntLines + '][extPrice]]" disabled></input>' +
                               '<p> <input class="form-control comments" type="text" placeholder="Comments" name="quote[lines[' + cntLines + '][commments]]"></input></p>'+
@@ -94,14 +95,14 @@
 <script>
     // AJAX call to GET SKU's and price data
 
-    $('#lines').on("change", '.div-lines', function(){
+    $('.form-lines').on("change", '.div-lines', function(){
         console.log('change!')
         let ajProductCode = $('.product-code').val().toUpperCase()
         let ajGauge = $('select[name="quote[substrate]"]').val()
         let ajColor = $('select[name="quote[color]"]').val()
         let ajPriceCode = $('select[name="quote[priceCode]"]').val()
         console.log(ajGauge + ajColor + ajProductCode +ajPriceCode )
-        ajData = {"gauge" : ajGauge,
+        ajData = {"gauge" : Number(ajGauge),
                     "color": ajColor,
                     "productCode": ajProductCode,
                     "priceCode": ajPriceCode
@@ -114,6 +115,11 @@
             
             success: function(data){
                 console.log(data);
+                $('.stock-code').val(data.StockCode)
+                $('.unit-price').val(data.SellingPrice)
+                $('.description').val(data.Description)
+                $('ext-price').val($('quantity').val() * data.SellingPrice)
+                console.log(data.StockCode)
                 // custName.text(data);
             },
             error: function(){

@@ -54,8 +54,8 @@
             $.each(products, function(index, product ) {
                 string += '<tr><td>'+(index+1)+'</td><td>'+product['stockCode']
                     +'</td><td>'+product['colorCode']+'</td><td>'+product['productCode']
-                    +'</td><td>'+product['gauge']+'</td><td>'+product['priceCode']+'</td>+'</td><td>'
-                    +product['description']+'</td>+'</td></tr>';
+                    +'</td><td>'+product['gauge']+'</td><td>'+product['priceCode']+'</td><td>'
+                    +product['description']+'</td></tr>';
             });
             $("#trdata").html(string);
         });

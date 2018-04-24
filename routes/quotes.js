@@ -86,10 +86,11 @@ router.post('/dfqsku', function(req,res){
     console.log(req.body.color)
     console.log(req.body.productCode)
     console.log(req.body.priceCode)
-    Products.findOne({'priceCode':req.body.priceCode, 
-                        'gauge':req.body.gauge, 
-                        'color': req.body.color, 
-                        'productCode': req.body.productCode
+    console.log(typeof req.body.gauge)
+    Products.findOne({'PriceCode':req.body.priceCode,
+                        'Gauge': Number(req.body.gauge), 
+                        'ColorCode': req.body.color, 
+                        'ProductCode': req.body.productCode
     }).exec(function(err, foundItem){
         if(err){
             console.log(err);

@@ -10,7 +10,8 @@ TODO:
         tweak model for quotes
 primary flag on quote, float value to opps
         tweak lines model if needed--deleted
-build ajax/jquery updates for quote form
+        build ajax/jquery updates for quote form
+getting there...refine ajax/jquery updates
 print to PDF function
 build upload csv option -- refactor upload routes/views?? Or upload routes within functional route page?
 implement parser
@@ -30,6 +31,11 @@ notifications/email on status change
 DEMO
 
 DEPLOY
+
+bring in as:
+mongoimport -d desertfox -c products --type csv --file ./desertfox/public/products.csv --drop --headerline
+NOT
+mongoimport -d desertfox -c products --type csv --file ./desertfox/public/products.csv --drop --columnsHaveTypes --fields "stockCode.string(), colorCode.string(), productCode.string(), gauge.string(), priceCode.string(), sellingPrice.string(), description.string()"
 
 */
 
