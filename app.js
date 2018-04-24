@@ -5,11 +5,11 @@ TODO:
         add email to user model
         refine products model and bring in real sku+price data from invMaster+
 ...update "fetch data" function to use data tables
-quote/lines/products model tweak
-build new quote view/form
-tweak model for quotes
+        quote/lines/products model tweak
+        build new quote view/form
+        tweak model for quotes
 primary flag on quote, float value to opps
-tweak lines model if needed
+        tweak lines model if needed--deleted
 build ajax/jquery updates for quote form
 print to PDF function
 build upload csv option -- refactor upload routes/views?? Or upload routes within functional route page?

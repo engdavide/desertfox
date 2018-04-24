@@ -9,6 +9,19 @@
         <div class="row">   
             <form action="/quotes" method="POST">
                 <div class="form-group form-inline" data-style="btn-info">
+                    <select class="form-control" name="quote[priceCode]">
+                      <option value="A">A</option>
+                      <option value="HA">HA</option>
+                      <option value="B">B</option>
+                      <option value="HB">HB</option>
+                      <option value="C">C</option>
+                      <option value="HC">HC</option>
+                      <option value="MB">MB</option>
+                      <option value="MC">MC</option>
+                      <option value="MD">MD</option>
+                    </select>
+                </div>
+                <div class="form-group form-inline" data-style="btn-info">
                     <select class="form-control" name="quote[panel]">
                       <option value="none">Panel</option>
                       <option value="GulfRib">GulfRib</option>
@@ -65,12 +78,14 @@
     let cntLines = 0
     
     btnLinesAdd.click(function(){
-       linesSelect.append('<input class="form-control quantity" type="text" placeholder="Qty" name="quote[lines['+ cntLines +'][quantity]]"></input>' +
-                               '<input class="form-control product-code" type="text" placeholder="Prod.Code" name="quote[lines[' + cntLines + '][productCode]]"></input>' +
+       linesSelect.append('<div class="form-group form-inline div-lines">'+
+                              '<input class="form-control quantity" type="text" placeholder="Qty" name="quote[lines['+ cntLines +'][quantity]]"></input>' +
+                              '<input class="form-control product-code" type="text" placeholder="Prod.Code" name="quote[lines[' + cntLines + '][productCode]]"></input>' +
                               '<input class="form-control stock-code" type="text" placeholder="SKU" name="quote[lines[' + cntLines + '][stockCode]]"></input>' +
                               '<input class="form-control unit-price" type="text" placeholder="Price" name="quote[lines[' + cntLines + '][unitPrice]]" disabled></input>' +
                               '<input class="form-control ext-price" type="text" placeholder="Total" name="quote[lines[' + cntLines + '][extPrice]]" disabled></input>' +
-                              '<p> <input class="form-control comments" type="text" placeholder="Comments" name="quote[lines[' + cntLines + '][commments]]"></input></p>'); 
+                              '<p> <input class="form-control comments" type="text" placeholder="Comments" name="quote[lines[' + cntLines + '][commments]]"></input></p>'+
+                              '</div>'); 
         cntLines++;
     });
 
@@ -79,25 +94,33 @@
 <script>
     // AJAX call to GET SKU's and price data
 
-    $('.product-code').on("change", $('.stock-code'), function(){
+    $('#lines').on("change", '.div-lines', function(){
         console.log('change!')
-        console.log($(this).val())
-        // $.ajax({
-        //     type: 'POST',
-        //     url: '/df',
-        //     data: {
-        //         custNum: $(this).val(),
-        //     },
-        //     success: function(data){
-        //         console.log(data);
-        //         custName.text(data);
-        //     },
-        //     error: function(){
-        //         console.log('no data')
-        //     }
-        // });
+        let ajProductCode = $('.product-code').val().toUpperCase()
+        let ajGauge = $('select[name="quote[substrate]"]').val()
+        let ajColor = $('select[name="quote[color]"]').val()
+        let ajPriceCode = $('select[name="quote[priceCode]"]').val()
+        console.log(ajGauge + ajColor + ajProductCode +ajPriceCode )
+        ajData = {"gauge" : ajGauge,
+                    "color": ajColor,
+                    "productCode": ajProductCode,
+                    "priceCode": ajPriceCode
+            
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/dfqsku',
+            data: ajData,
+            
+            success: function(data){
+                console.log(data);
+                // custName.text(data);
+            },
+            error: function(){
+                console.log('no data')
+            }
+        });
     });
-
 
 
 
