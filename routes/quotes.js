@@ -98,23 +98,47 @@ exports.create = function(req, res){
 
 //LOOKUP DATA FROM PRODUCT CATALOG--
 router.post('/dfqsku', function(req,res){
-    console.log(req.body.gauge)
-    console.log(req.body.color)
-    console.log(req.body.productCode)
-    console.log(req.body.priceCode)
-    console.log(typeof req.body.gauge)
+    // console.log(req.body.gauge) // DEBUGs...
+    // console.log(req.body.color)
+    // console.log(req.body.productCode)
+    // console.log(req.body.priceCode)
+    // console.log(typeof req.body.gauge)
     Products.findOne({'PriceCode':req.body.priceCode,
-                        'Gauge': Number(req.body.gauge), 
+                        'ProductCode': req.body.productCode,
                         'ColorCode': req.body.color, 
-                        'ProductCode': req.body.productCode
+                        'Gauge': Number(req.body.gauge)
     }).exec(function(err, foundItem){
+        console.log('hit the post')
         if(err){
             console.log(err);
-        } else {
+        } else if(foundItem){
+            console.log('send from one')
+            console.log(foundItem)
             res.send(foundItem);
-            console.log(foundItem);
+        } else {
+            Products.findOne({ 'PriceCode':req.body.priceCode,
+                                'ProductCode': req.body.productCode,
+                                'ColorCode': req.body.color
+            }).exec(function(err, foundItem){
+                if(err){
+                    console.log(err);
+                } else if(foundItem){
+                    res.send(foundItem);
+                } else {
+                    Products.findOne({ 'PriceCode':req.body.priceCode,
+                                        'ProductCode': req.body.productCode
+                    }).exec(function(err, foundItem){
+                        if(err){
+                            console.log(err);
+                        } else if(foundItem){
+                            res.send(foundItem);
+                        }
+                    });
+                }
+        
+            })
         }
-    });
+    })
 });
 
 

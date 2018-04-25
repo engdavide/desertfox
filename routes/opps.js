@@ -87,11 +87,14 @@ router.put("/opps/:id", isLoggedIn, function(req, res){
 
 //AJAX
 router.post('/df', function(req,res){
+    console.log(req.body.custNum);
     Custs.findOne({'num':req.body.custNum},function(err, foundItem){
         if(err){
             console.log(err);
-        } else {
+        } else if(foundItem) {
             res.send(foundItem.name);
+        } else {
+            res.send("NUMBER NOT FOUND")
         }
     });
 });

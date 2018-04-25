@@ -1,5 +1,16 @@
 <% include ../partials/header %>
 
+<!--DataTable scripts-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+<!--Styling-->
+<link rel-"stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></link>
+
+
+
 <div class="container">  
     <h1>add a new quote here</h1>
 
@@ -61,14 +72,78 @@
                     <!--JQUERY to add rib height and pan width here DON'T need rib height-->
                 </div>
                 <div class="form-group form-inline" id="lines">
-                    <button class="btn btn-info add-line" type="button"><i class="fas fa-plus"></i></button>
+                    <input type="text" name="newQty" placeholder="qty"></input>
+                    <input type="text" name="newCode" placeholder="prod code"></input>
+                    <table id="table-lines" class="display">
+                        <thead>
+                            <tr>
+                                <th>Qty</th>
+                                <th>Code</th>
+                                <th>SKU</th>
+                                <th>Descr</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                                <th>Comments</th>
+                            </tr>
+                        </thead>
+                        
+                    </table>
+                    
                     <!--JQUERY to add LINES here-->
                 </div>
                     <!--TODO: make not visible until first line added-->
-                    <button class="btn btn-info add-line" type="button"><i class="fas fa-plus"></i></button>
+                    <button class="btn btn-info add-row" type="button"><i class="fas fa-plus"></i></button>
             </form>
         </div>
     </div>
+
+
+
+<script>    
+    //ADD ROWS to datatable
+    const table = $('#table-lines').DataTable();
+    let counter = 1;
+    
+    
+    
+    $("input[name='newCode']").keypress(function(event) {
+        if(event.which == 13){
+              $.ajax({
+                type: 'POST',
+                url: '/dfqsku',
+                data: {"gauge" : Number($('select[name="quote[substrate]"]').val()),
+                    "color": $('select[name="quote[color]"]').val(),
+                    "productCode": $("input[name='newCode']").val().toUpperCase(),
+                    "priceCode": $('select[name="quote[priceCode]"]').val()
+                },
+                
+                success: function(data){
+                    console.log(data);
+                    table.row.add([
+                        $("input[name='newQty']").val(),
+                        $("input[name='newCode']").val().toUpperCase(),
+                        data.StockCode,
+                        data.Description,
+                        data.SellingPrice,
+                        data.SellingPrice * $("input[name='newQty']").val(),
+                        '',
+                    ]).draw(false);
+                    
+                    $("input[name='newQty']").val(''),
+                    $("input[name='newCode']").val(''),
+                    $("input[name='newQty']").focus();
+                    console.log(data.StockCode)
+                },
+                error: function(){
+                    console.log('no data')
+                }
+            });
+        }
+    })
+    
+</script>
+
+
 
 
 <script>
@@ -94,6 +169,7 @@
 
 <script>
     // AJAX call to GET SKU's and price data
+    //  <button class="btn btn-info add-line" type="button"><i class="fas fa-plus"></i></button>
 
     $('.form-lines').on("change", '.div-lines', function(){
         console.log('change!')
