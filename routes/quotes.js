@@ -81,6 +81,22 @@ router.get("/quotes/new", isLoggedIn, function(req,res){
 
 
 //AJAX
+exports.create = function(req, res){
+    new Lines({
+        num: req.body.num,
+        productCode: req.body.productCode,
+        quantity: req.body.quantity
+    }).save(function(err, line, count){
+        if(err){
+            console.log(err)
+        } else {
+        res.send(line)
+        }
+    })
+}
+
+
+//LOOKUP DATA FROM PRODUCT CATALOG--
 router.post('/dfqsku', function(req,res){
     console.log(req.body.gauge)
     console.log(req.body.color)

@@ -15,8 +15,11 @@ let quotesSchema = new mongoose.Schema({
     color: String,
     ribHeight: String,
     panelWidth: String,
-    lines: [
-        {
+    lines: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Lines"
+        },
         num: Number,
         productCode: String,
         stockCode: String,
@@ -24,7 +27,7 @@ let quotesSchema = new mongoose.Schema({
         unitPrice: Number,
         extPrice: Number,
         comments: String
-    }],
+    },
     opps: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
