@@ -1,6 +1,7 @@
 const   mongoose = require("mongoose");
 
-const   Users =require('../models/users')
+const   Users = require('../models/users'),
+        Opps = require('../models/opps');
 
 let notesSchema = mongoose.Schema({
     text: String,
@@ -14,6 +15,12 @@ let notesSchema = mongoose.Schema({
             },
     files: {type: Array, default: [] },
     timeIn: {type: Date, default: Date.now },
+    opp: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Opps"
+        }
+    }
         
 })
 

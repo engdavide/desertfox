@@ -36,7 +36,6 @@ router.post('/opps/:id/notes', notesUpload, function(req,res,next){
                 } else {
                         let newNote = { text: req.body.text,
                                         flagCad: req.body.flagCad,
-                                        
                         }
                         Notes.create(newNote, function(err, note){
                                 if(err){
@@ -44,6 +43,7 @@ router.post('/opps/:id/notes', notesUpload, function(req,res,next){
                                 }  else {
                                         note.author.id = req.user._id;
                                         note.author.username = req.user.username;
+                                        note.opp.id = opp._id;
                                         for(let i=0;i<req.files.length;i++){
                                                 let arr = {
                                                         "name": req.files[i].originalname,

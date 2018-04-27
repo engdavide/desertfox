@@ -24,7 +24,7 @@
             <a href="/opps/<%= opp._id %>/notes/new" class="btn btn-success">Add a Note</a>
         </p>
         <hr>
-            <% opp.notes.forEach(function(note){ %>
+            <% notes.forEach(function(note){ %>
                 <div class="row">
                     <div class="col-md-12">
                         <strong><%= note.author.username %></strong>
@@ -57,7 +57,6 @@
         
     </div>
 </div>
-
 
 
 

@@ -50,11 +50,25 @@ router.get("/opps/new", isLoggedIn, function(req,res){
 
 //SHOW
 router.get("/opps/:id", function(req, res) {
-    Opps.findById(req.params.id).populate("notes").exec(function(err, foundOpp){
+    Opps.findById(req.params.id).exec(function(err, foundOpp){
         if(err) {
             console.log(err);
+        } else if(req.user.role == "cad" || req.user.role == "admin"){
+            Notes.find({'opp.id': req.params.id}).sort({timeIn: -1}).exec(function(err, notes){
+                if(err) {
+                    console.log(err);
+                } else {
+                    res.render('opps/show', {opp: foundOpp, notes: notes})
+                } 
+            })
         } else {
-            res.render('opps/show', {opp: foundOpp})
+            Notes.find({'opp.id': req.params.id, flagCad: {$nin: "on"}}).sort({timeIn: -1}).exec(function(err, notes){
+                if(err) {
+                    console.log(err);
+                } else {
+                    res.render('opps/show', {opp: foundOpp, notes: notes})
+                }
+            })
         }
     })
 })
