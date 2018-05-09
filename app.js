@@ -11,22 +11,24 @@ TODO:
 primary flag on quote, float value to opps
         tweak lines model if needed--deleted
         build ajax/jquery updates for quote form
+SWITCH FOCUS TO WORKFLOW AS MVP, QUOTER TO FOLLOW
+CAD comments
+destroy opps/models, only your own unless admin
+cleanup opps new
+cleanup opps index
+analytics/timestamps for status
+notifications/email on status change
+
 getting there...refine ajax/jquery updates
 print to PDF function
 build upload csv option -- refactor upload routes/views?? Or upload routes within functional route page?
 implement parser
 customer upload
-destroy opps/models, only your own unless admin
-CAD comments
 self service flag on opps
-cleanup opps new
-cleanup opps index
 STYLE everything
 auth logic on all routes
 PW reset
 think through UI/UX
-analytics/timestamps for status
-notifications/email on status change
 
 DEMO
 

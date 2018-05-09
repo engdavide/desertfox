@@ -26,8 +26,9 @@
         <hr>
             <% notes.forEach(function(note){ %>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 note">
                         <strong><%= note.author.username %></strong>
+                        <span class="flag-cad"><em> <%= note.flagCad %></em></span>
                             <% var d = note.timeIn;
                                 var dd = d.getDate();
                                 var mm = d.getMonth() + 1; //Months are zero based
@@ -58,6 +59,22 @@
     </div>
 </div>
 
+
+<!--Need to make this work...-->
+<script>
+    noteSelector = $(".note")
+    flagSelector = $(".flag-cad")
+
+    noteSelector.each(function(){
+        if(flagSelector.length > 0){
+            //flagSelector.text("CAD ONLY: ON");
+            console.log(flagSelector.text())
+            console.log("yep")
+        }
+    });
+    
+    
+</script>
 
 
 <% include ../partials/footer %>
