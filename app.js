@@ -98,7 +98,7 @@ app.use(function(req,res, next){
         next();
 })
 
-seedDB();
+//seedDB();
 
 
 

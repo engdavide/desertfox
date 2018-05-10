@@ -1,7 +1,19 @@
 const   mongoose = require('mongoose');
 
+const   Custs = require('../models/custs'),
+        Users = require('../models/users'),
+        Notes = require('../models/notes');
+
 let oppsSchema = new mongoose.Schema({
     qqId: String,
+    cust: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Custs"
+            },
+        num: String,
+        name: String,
+        },
     custNum: String,
     custName: String,
     salesRep: String,

@@ -7,7 +7,7 @@ const   Custs = require('./models/custs'),
         Notes = require('./models/notes');
 
 
-function seedDB(){
+function clearAll(){
     Custs.remove({}, function(err){
         if(err){
             console.log(err)
@@ -25,37 +25,55 @@ function seedDB(){
             console.log(err)
         } else {
         }
-    });
-    
-    for(let i=0; i<50; i++){
+    });   
+}
+
+function genCusts(num){
+    for(let i=0; i<num; i++){
         Custs.create({
             num: i,
             name: faker.company.companyName()
         });
     }
+}
 
-    for(let i=0; i<50; i++){
-        let date = faker.date.future().getDate();
-        let month = faker.date.future().getMonth();
-        let year = faker.date.future().getFullYear();
-        let dateIn = month + date + year
+function getFutureDate(){
+    let dd = faker.date.future().getDate();
+    let mm = faker.date.future().getMonth();
+    let yyyy = faker.date.future().getFullYear();
+    if(dd<10) {
+        dd = '0'+dd
+    } 
+    if(mm<10) {
+        mm = '0'+mm
+    } 
+    return mm + '/' + dd + '/' + yyyy;
+}
+
+function getToday(){
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; //January is 0!
+    let yyyy = today.getFullYear();
+    if(dd<10) {
+        dd = '0'+dd
+    } 
+    if(mm<10) {
+        mm = '0'+mm
+    } 
+    return mm + '/' + dd + '/' + yyyy;
+}
+
+function genOpps(num){
+    for(let i=0; i<num; i++){
         
-        let today = new Date();
-        let dd = today.getDate();
-        let mm = today.getMonth()+1; //January is 0!
-        let yyyy = today.getFullYear();
-        if(dd<10) {
-            dd = '0'+dd
-        } 
-        if(mm<10) {
-            mm = '0'+mm
-        } 
-        today = mm + '/' + dd + '/' + yyyy;
+        let dateIn = getFutureDate()
+        let today = getToday()
         
-        Opps.create({
+        
+        let randCustNum = Math.floor(Math.random()*num);
+        let newOpp = {
             qqId: faker.finance.account(),
-            custName: faker.company.companyName(),
-            custNum: i, 
             salesRep: faker.name.firstName(),
             closeDate: dateIn, 
             oppName: faker.company.catchPhrase(),
@@ -68,12 +86,27 @@ function seedDB(){
             hem: "N/A",
             status: [{name: "Submitted",
                     time: today}]
+        }
+        
+        Opps.create(newOpp, function(err, opp){
+            if(err){
+                console.log(err);
+            } else {
+                opp.cust.num = randCustNum;
+                opp.save()
+            }
         })
-    };
+        
+    };    
+}
 
-    
-    
+
+function seedDB(){
+    clearAll();
+    genCusts(500);
+    genOpps(1000);
+    console.log("seeded");
+
 };
 
-console.log("seeded")
 module.exports = seedDB;
