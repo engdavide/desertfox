@@ -16,7 +16,17 @@
                         Time Out: <%= opp.timeout %>
                     <% } %>
                 </p>
-        
+    </div>
+    
+    <div>
+        <% if(currentUser.role == "cad" || currentUser.role == "admin"){ %>
+                <% opp.status.forEach(function(status){ %>
+                    <tr>
+                        <td><%= status.name %></td>
+                        <td><%= status.date %></td>
+                    </tr>
+                <% }) %>
+        <% } %>
     </div>
     
     <div class="well">

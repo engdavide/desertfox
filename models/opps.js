@@ -14,8 +14,6 @@ let oppsSchema = new mongoose.Schema({
         num: String,
         name: String,
         },
-    custNum: String,
-    custName: String,
     salesRep: String,
     closeDate: String,
     oppName: String,

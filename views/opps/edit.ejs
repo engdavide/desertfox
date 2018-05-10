@@ -4,23 +4,23 @@
         <h1>Edit QQID: <%= opp.qqId %></h1>
         <div class="row">   
             <form action="/opps/<%= opp._id %>/?_method=PUT" method="post">
-                <div class="form-group">
-                    <input class="form-control" type="text" value="<%= opp.custName %>" name="opp[custNum]"></input>
+                <div class="form-group form-inline">
+                    <input class="form-control" type="text" value="<%= opp.cust.num %>" name="opp[cust[num]]" placeholder="Customer Number"></input>
                     <p id="custName"></p>
                 </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" value="<%= opp.salesRep %>" name="opp[salesRep]"></input>
+                <div class="form-group form-inline">
+                    <input class="form-control" type="text" value="<%= opp.salesRep %>" name="opp[salesRep]" placeholder="Rep initials"></input>
                 </div>
-               <div class="form-group">
-                    <input class="form-control" type="text" value="<%= opp.closeDate %>" name="opp[closeDate]"></input>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" value="<%= opp.oppName %>" name="opp[oppName]"></input>
+               <div class="form-group form-inline">
+                    <input class="form-control" type="date" value="<%= opp.closeDate %>" name="opp[closeDate]" placeholder="Close Date"></input>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" value="<%= opp.address %>" name="opp[address]"></input>
+                    <input class="form-control" type="text" value="<%= opp.address %>" name="opp[address]" placeholder="address"></input>
                 </div>
-                <div class="form-group" data-style="btn-info">
+                <div class="form-group">
+                    <input class="form-control" type="text" value="<%= opp.oppName %>" name="opp[oppName]" placeholder="Opportunity/Job Name"></input>
+                </div>
+                <div class="form-group form-inline" data-style="btn-info">
                     <select class="form-control" name="opp[qqType]">
                         <% 
                         let optionsQqType = ["addressOnly", "sketch", "blueprints", "other"]
@@ -34,7 +34,7 @@
                         <% } %>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group form-inline">
                     <input class="form-control" type="text" value="<%= opp.structure %>" name="opp[structure]"></input>
                 </div>
                 <div class="form-group form-inline" data-style="btn-info">
@@ -53,7 +53,7 @@
                     Coverage:
                     <select class="form-control" name="opp[panel1Coverage]">
                         <!--JS fills this in-->
-                        <option value="<%= opp.panel1Coverage %>\"><%= opp.panel1Coverage %></option>
+                        <option value="<%= opp.panel1Coverage %>"><%= opp.panel1Coverage %></option>
                     </select>
                     Hem: 
                     <select class="form-control" type="text" name="opp[hem]">
@@ -91,6 +91,74 @@
         
         </div>
 
-<script src="/js/oppsedit.js"></script>
+<script>
+    let panel1Select = $('select[name="opp[panel1]"]');
+    let coverage1Select = $('select[name="opp[panel1Coverage]"]');
+    panel1Select.change(function(){
+        if($(this).val()=="GulfRib" || $(this).val()=="GulfPBR"){
+            coverage1Select.html('<option value="36\"">36"</option>');
+        } else if($(this).val()=="5VCrimp") {
+            coverage1Select.html('<option value="24\"">24"</option>');
+        } else if($(this).val()=="GulfWave") {
+            coverage1Select.html('<option value="29.5\"">29.5"</option>');
+        } else if($(this).val()=="GulfLok") {
+            coverage1Select.html('<option value="16\"">16"</option>' +
+                                 '<option value="12\"">12"</option>');
+        } else if($(this).val()=="GulfSeam" || $(this).val()=="VersaLoc" || $(this).val()=="MegaLoc") {
+            coverage1Select.html('<option value="16\"">16"</option>' +
+                                    '<option value="18\"">18"</option>' + 
+                                    '<option value="14\"">14"</option>') ;
+        }
+    }); 
+    
+    let panel2Select = $('select[name="opp[panel2]"]');
+    let coverage2Select = $('select[name="opp[panel1Coverage]"]');
+    panel2Select.change(function(){
+        if($(this).val()=="GulfRib" || $(this).val()=="GulfPBR"){
+            coverage2Select.html('<option value="36\"">36"</option>');
+        } else if($(this).val()=="5VCrimp") {
+            coverage2Select.html('<option value="24\"">24"</option>');
+        } else if($(this).val()=="GulfWave") {
+            coverage2Select.html('<option value="29.5\"">29.5"</option>');
+        } else if($(this).val()=="GulfLok") {
+            coverage2Select.html('<option value="16\"">16"</option>' +
+                                 '<option value="12\"">12"</option>');
+        } else if($(this).val()=="GulfSeam" || $(this).val()=="VersaLoc" || $(this).val()=="MegaLoc") {
+            coverage2Select.html('<option value="16\"">16"</option>' +
+                                    '<option value="18\"">18"</option>' + 
+                                    '<option value="14\"">14"</option>') ;
+        }
+    }); 
+</script>    
+
+
+<script>
+    // AJAX call to GET name from num
+    
+    let custNum = $('input[name="opp[cust[num]]"]')
+    let custName = $('#custName')
+    custNum.change(function(){
+        console.log('change!')
+        console.log($(this).val())
+        $.ajax({
+            type: 'POST',
+            url: '/df',
+            data: {
+                custNum: $(this).val(),
+            },
+            success: function(data){
+                console.log(data);
+                custName.text(data);
+            },
+            error: function(){
+                console.log('no data')
+            }
+        });
+    })
+
+
+
+
+</script>
 
 <% include ../partials/footer %>

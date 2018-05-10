@@ -8,22 +8,23 @@
     <div class="container">
         <div class="row">   
             <form action="/opps" method="POST">
-                <div class="form-group">
+                <div class="form-group form-inline">
                     <input class="form-control" type="text" placeholder="Customer Number" name="custNum"></input>
                     <p id="custName"></p>
                 </div>
-                <div class="form-group">
+                <div class="form-group form-inline">
                     <input class="form-control" type="text" placeholder="Rep initials" value="<%= currentUser.initials %>" name="salesRep"></input>
                 </div>
-               <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Close Date" name="closeDate"></input>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Opportunity/Job Name" name="oppName"></input>
+               <div class="form-group form-inline">
+                    <input class="form-control" type="date" placeholder="Close Date" name="closeDate"></input>
                 </div>
                 <div class="form-group">
                     <input class="form-control" type="text" placeholder="address" name="address"></input>
                 </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Opportunity/Job Name" name="oppName"></input>
+                </div>
+
                 <div class="form-group" data-style="btn-info">
                     <select class="form-control" name="qqType">
                       <option value="addressOnly">Address Only</option>

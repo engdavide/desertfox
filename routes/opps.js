@@ -18,25 +18,27 @@ router.get("/opps", function(req,res){
 
 //CREATE
 router.post("/opps", isLoggedIn, function(req,res){
-    let newOpp = {  custNum: req.body.custNum, 
-                    salesRep: req.body.salesRep, 
+    let newOpp = {  salesRep: req.body.salesRep, 
                     closeDate: req.body.closeDate, 
                     oppName: req.body.oppName,
                     address: req.body.addresss,
                     qqType: req.body.qqType,
                     structure: req.body.structure,
                     panel1: req.body.panel1,
+                    panel1Coverage: req.body.coverage1,
                     panel2: req.body.panel2,
+                    panel2Coverage: req.body.coverage2,
                     hem: req.body.hem,
-                    author: {
-                        id: req.body.author._id,
-                        initials: req.body.author.initials,
-                    },
     };
         Opps.create(newOpp, function(err, newlyCreated){
             if(err){
                 console.log(err);
             } else {
+                newlyCreated.cust.num = req.body.custNum;
+                newlyCreated.author.id = req.user._id;
+                newlyCreated.author.initials = req.body.salesRep;
+                newlyCreated.qqId = getQQID(req.user.initials, 15);
+                newlyCreated.save();
                 res.redirect("/opps");
             }
         });
@@ -121,5 +123,20 @@ function isLoggedIn(req,res,next){
     }
     res.redirect('/login');
 }
+
+function getQQID(init, count){
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; //January is 0!
+    let yy = today.getFullYear().toString().slice(1,3);
+    if(dd<10) {
+        dd = '0'+dd
+    } 
+    if(mm<10) {
+        mm = '0'+mm
+    } 
+    return mm + dd + yy + '-' + init + count;
+}
+
 
 module.exports = router;
