@@ -3,6 +3,8 @@ const   mongoose = require('mongoose');
 const   Custs = require('../models/custs'),
         Users = require('../models/users'),
         Notes = require('../models/notes');
+        
+
 
 let oppsSchema = new mongoose.Schema({
     qqId: String,
@@ -46,8 +48,7 @@ let oppsSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Notes"
         }]
-    
-    
 });
+
 
 module.exports = mongoose.model("Opps", oppsSchema);

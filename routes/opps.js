@@ -5,6 +5,8 @@ const   Opps = require('../models/opps'),
         Custs = require('../models/custs'),
         Notes = require('../models/notes');
         
+var qqcounter = 0;
+        
 //INDEX
 router.get("/opps", function(req,res){
     Opps.find({}).populate("status").exec(function(err, allOpps){
@@ -37,7 +39,7 @@ router.post("/opps", isLoggedIn, function(req,res){
                 newlyCreated.cust.num = req.body.custNum;
                 newlyCreated.author.id = req.user._id;
                 newlyCreated.author.initials = req.body.salesRep;
-                newlyCreated.qqId = getQQID(req.user.initials, 15);
+                newlyCreated.qqId = getQQID(req.user.initials);
                 newlyCreated.save();
                 res.redirect("/opps");
             }
@@ -134,7 +136,12 @@ function isLoggedIn(req,res,next){
     res.redirect('/login');
 }
 
-function getQQID(init, count){
+function QQIDinc(input){
+    return ++input;
+}
+
+function getQQID(init){
+    let count = qqcounter
     let today = new Date();
     let dd = today.getDate();
     let mm = today.getMonth()+1; //January is 0!
@@ -143,9 +150,20 @@ function getQQID(init, count){
         dd = '0'+dd
     } 
     if(mm<10) {
-        mm = '0'+mm
-    } 
-    return mm + dd + yy + '-' + init + count;
+        mm = '0'+mm;
+    }
+    qqcounter++;
+    if(qqcounter>90){
+        qqcounter = 1;
+    }
+    if(qqcounter<10){
+        count = '0' + qqcounter;
+    } else {
+        count = qqcounter;
+    }
+    console.log(count);
+    console.log(qqcounter);
+    return mm + dd + yy + '-' + init + '-' + count;
 }
 
 
