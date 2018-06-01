@@ -29,7 +29,7 @@
                 <th>Cust.</th>
                 <th>Rep</th>
                 <th>Project</th>
-                <th>QQ Type</th>
+                <th>Type</th>
                 <th>Address</th>
                 <th>Structure</th>
                 <th>Panel1</th>
@@ -71,6 +71,23 @@
                     <% }) %>
                 
             </tbody>
+            <tfoot>
+                <tr>
+                    <th>QQID</th>
+                    <th>Cust.</th>
+                    <th>Rep</th>
+                    <th>Project</th>
+                    <th>Type</th>
+                    <th>Address</th>
+                    <th>Structure</th>
+                    <th>Panel1</th>
+                    <th>Cov.</th>
+                    <th>Panel2</th>
+                    <th>Hem</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </tfoot>
         </table>
     </div>
 
@@ -83,48 +100,32 @@
 <!--Search Bar-->
 <script>
     $(document).ready(function() {
-    $('#opp-table').DataTable( {
-        initComplete: function () {
-            this.api().columns().every( function () {
-                var column = this;
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
- 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
- 
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
+        // Setup - add a text input to each footer cell
+        $('#opp-table thead th').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" placeholder="'+title+'" size="3" />' );
+        } );
+     
+        // DataTable
+        var table = $('#opp-table').DataTable();
+     
+        // Apply the search
+        table.columns().every( function () {
+            var that = this;
+     
+            $( 'input', this.header() ).on( 'keyup change', function () {
+                if ( that.search() !== this.value ) {
+                    that
+                        .search( this.value )
+                        .draw();
+                }
             } );
-        }
+        } );
     } );
-} );
 </script>
 
-<!--MultiSort-->
-<script>
-$(document).ready(function() {
-    $('#example').DataTable( {
-        columnDefs: [ {
-            targets: [ 0 ],
-            orderData: [ 0, 1 ]
-        }, {
-            targets: [ 1 ],
-            orderData: [ 1, 0 ]
-        }, {
-            targets: [ 4 ],
-            orderData: [ 4, 0 ]
-        } ]
-    } );
-} );
-</script>
+
+
 
 
 <% include ../partials/footer %>

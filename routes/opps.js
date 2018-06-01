@@ -21,7 +21,7 @@ router.post("/opps", isLoggedIn, function(req,res){
     let newOpp = {  salesRep: req.body.salesRep, 
                     closeDate: req.body.closeDate, 
                     oppName: req.body.oppName,
-                    address: req.body.addresss,
+                    address: req.body.address,
                     qqType: req.body.qqType,
                     structure: req.body.structure,
                     panel1: req.body.panel1,
@@ -99,6 +99,16 @@ router.put("/opps/:id", isLoggedIn, function(req, res){
     })
 })
 
+//DESTROY
+router.delete("/opps/:id", function(req,res){
+    Opps.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/opps");
+        } else {
+            res.redirect("/opps");
+        }
+    })
+})
 
 
 //AJAX

@@ -32,6 +32,9 @@
     <div class="well">
         <p class="text-right">
             <a href="/opps/<%= opp._id %>/notes/new" class="btn btn-success">Add a Note</a>
+            <form action="/opps/<%= opp._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-danger">Delete</button>
+            </form>
         </p>
         <hr>
             <% notes.forEach(function(note){ %>

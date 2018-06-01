@@ -4,3 +4,14 @@
 .cad-only {
     background: blue;
 }
+
+#opp-table {
+    width: 100%;
+}
+
+thead input {
+    width: 100%;
+    padding: 0px;
+    box-sizing: border-box;
+    font-size: 10px;
+}

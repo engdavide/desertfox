@@ -12,10 +12,12 @@ primary flag on quote, float value to opps
         tweak lines model if needed--deleted
         build ajax/jquery updates for quote form
 SWITCH FOCUS TO WORKFLOW AS MVP, QUOTER TO FOLLOW
-CAD comments
+        CAD comments
+        cleanup opps new
+        cleanup opps index
+        filter opps by each col
 destroy opps/models, only your own unless admin
-cleanup opps new
-cleanup opps index
+status flags on comments??
 analytics/timestamps for status
 notifications/email on status change
 
@@ -98,7 +100,7 @@ app.use(function(req,res, next){
         next();
 })
 
-//seedDB();
+// seedDB();
 
 
 
