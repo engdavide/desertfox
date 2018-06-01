@@ -29,17 +29,7 @@ router.get("/users/:id", function(req, res) {
     })
 })
 
-//EDIT
-router.get("/users/:id/edit", isLoggedIn, function(req, res){
-    Users.findById(req.params.id, function(err, foundUser){
-        if(err){
-            console.log(err);
-            res.redirect("/users")
-        } else {
-            res.render("users/edit", {user: foundUser})
-        }
-    })
-});
+//NO CREATE OR NEW ROUTES--THESE ARE THE REGISTER ROUTES ON INDEX.JS
 
 //UPDATE
 router.put("/users/:id", isLoggedIn, function(req, res){
@@ -52,6 +42,18 @@ router.put("/users/:id", isLoggedIn, function(req, res){
         }
     })
 })
+
+//EDIT
+router.get("/users/:id/edit", isLoggedIn, function(req, res){
+    Users.findById(req.params.id, function(err, foundUser){
+        if(err){
+            console.log(err);
+            res.redirect("/users")
+        } else {
+            res.render("users/edit", {user: foundUser})
+        }
+    })
+});
 
 function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){

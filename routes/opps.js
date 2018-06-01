@@ -45,7 +45,7 @@ router.post("/opps", isLoggedIn, function(req,res){
 });
 
 //NEW
-router.get("/opps/new", isLoggedIn, function(req,res){
+router.get("/opps/new", function(req,res){
             res.render("opps/new");
 });
 
